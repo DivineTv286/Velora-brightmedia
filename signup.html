@@ -5,19 +5,17 @@
     <link rel="apple-touch-icon" href="assets/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glamour | Sign Up</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Velora | Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header class="navbar">
         <div class="logo-area">
-            <span class="flower-icon-text">❀</span> 
-            <span class="glamour-text">Glamour</span>
+            <img src="logo.png" alt="Velora Logo" class="logo-img"> 
         </div>
         
         <div class="nav-actions">
@@ -31,13 +29,13 @@
         <nav class="mobile-nav" id="mobile-menu">
             <div class="menu-links">
                 <a href="index.html">Home</a>
-                <a href="#">About</a>
-                <a href="#">Features</a>
-                <a href="#">Faqs</a>
+                <a href="index.html#about-section">About</a>
+                <a href="index.html#features-section">Ecosystem</a>
+                <a href="index.html#pricing-section">Pricing</a>
             </div>
              <div class="menu-auth">
                 <a href="login.html" class="login-link">LOGIN</a>
-                <a href="signup.html" class="signup-btn-large">SIGNUP</a>
+                <a href="signup.html" class="signup-btn-large">JOIN NOW</a>
             </div>
         </nav>
     </header>
@@ -45,8 +43,8 @@
     <main class="content-container">
         
         <section class="signup-intro">
-            <h1 class="main-title">Sign Up</h1>
-            <p class="subtitle">Create your professional Glamour account.</p>
+            <h1 class="main-title">Create Account</h1>
+            <p class="subtitle">Join the Velora ecosystem today.</p>
         </section>
 
         <form class="signup-form">
@@ -63,7 +61,7 @@
                 <label for="username" class="input-label">USERNAME</label>
                 <div class="input-group">
                     <span class="input-icon"><i class="fa-solid fa-user-plus"></i></span>
-                    <input type="text" id="username" name="username" placeholder="@glamour_pro" required>
+                    <input type="text" id="username" name="username" placeholder="@velora_creator" required>
                 </div>
             </div>
 
@@ -80,36 +78,36 @@
                 <div class="input-group">
                     <span class="input-icon"><i class="fa-solid fa-lock"></i></span>
                     <input type="password" id="password" name="password" placeholder="........." required>
+                    <span class="password-toggle" id="togglePassword" style="cursor: pointer; padding-right: 20px; color: #666;">
+                        <i class="fa-regular fa-eye" id="eyeIcon"></i>
+                    </span>
                 </div>
             </div>
 
-            <!-- INTERACTIVE PLAN SELECTION CARDS -->
             <div class="input-wrapper">
                 <label class="input-label">SELECT ACCESS TIER (VELORA NETWORKS)</label>
                 <div class="plan-cards-container">
                     
-                    <!-- Gold Tier Option Card -->
-                    <div class="plan-card active" data-plan-value="VELORA GOLD">
+                    <div class="plan-card active" data-plan-value="VELORA PLATINUM — ₦9,000">
                         <div class="plan-card-icon">
-                            <i class="fa-solid fa-crown"></i>
+                            <i class="fa-solid fa-layer-group"></i>
                         </div>
                         <div class="plan-card-details">
-                            <h3>VELORA GOLD</h3>
-                            <p class="plan-save-tag">Save Entry Fee</p>
+                            <h3>VELORA PLATINUM</h3>
+                            <p class="plan-save-tag">Save Entry Fee — ₦9,000</p>
                         </div>
                         <div class="plan-checkbox">
                             <i class="fa-solid fa-circle-check"></i>
                         </div>
                     </div>
 
-                    <!-- Platinum Tier Option Card -->
-                    <div class="plan-card" data-plan-value="VELORA PLATINUM">
+                    <div class="plan-card" data-plan-value="VELORA PREMIUM — ₦14,500">
                         <div class="plan-card-icon">
-                            <i class="fa-solid fa-gem"></i>
+                            <i class="fa-solid fa-crown"></i>
                         </div>
                         <div class="plan-card-details">
-                            <h3>VELORA PLATINUM</h3>
-                            <p class="plan-save-tag">Save Entry Fee</p>
+                            <h3>VELORA PREMIUM</h3>
+                            <p class="plan-save-tag">Save Entry Fee — ₦14,500</p>
                         </div>
                         <div class="plan-checkbox">
                             <i class="fa-solid fa-circle-check"></i>
@@ -117,11 +115,10 @@
                     </div>
 
                 </div>
-                <!-- Hidden inputs to safely serialize form states if needed -->
-                <input type="hidden" id="selected-plan-tracker" name="plan" value="VELORA GOLD">
+                <input type="hidden" id="selected-plan-tracker" name="plan" value="VELORA PLATINUM — ₦9,000">
             </div>
 
-            <button type="submit" class="gold-submit-btn">
+            <button type="submit" class="velora-submit-btn">
                 Create Account 
                 <span class="btn-arrow-icon"><i class="fa-solid fa-arrow-right-long"></i></span>
             </button>
@@ -136,6 +133,15 @@
     </main>
 
     <style>
+        :root {
+            --velora-primary: #6366f1;
+            --velora-accent: #a855f7;
+            --velora-glow: rgba(99, 102, 241, 0.4);
+            --dark-bg: #0b0a12;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -144,11 +150,14 @@
         }
 
         body {
-            background-color: #000;
+            background-color: var(--dark-bg);
+            background: radial-gradient(circle at top right, #1e1b4b 0%, #0b0a12 65%);
             color: #fff;
             padding-top: 100px; 
             line-height: 1.5;
+            min-height: 100vh;
         }
+        
         .navbar {
             position: fixed;
             top: 0;
@@ -157,26 +166,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 5%;
-            background-color: rgba(0, 0, 0, 0.95);
+            padding: 20px 5%;
+            background-color: rgba(11, 10, 18, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
             z-index: 2000;
         }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .logo-img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;   
         }
 
-        .flower-icon-text {
-            font-size: 2.2rem;
-            line-height: 1;
-        }
-
-        .glamour-text {
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
         .hamburger {
             cursor: pointer;
             z-index: 3000;
@@ -192,9 +194,9 @@
             transition: all 0.3s ease;
         }
 
-        .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); background-color: #dbb445; }
+        .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); background-color: var(--velora-primary); }
         .hamburger.active .bar:nth-child(2) { opacity: 0; }
-        .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background-color: #dbb445; }
+        .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background-color: var(--velora-primary); }
 
         .mobile-nav {
             position: fixed;
@@ -202,7 +204,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background-color: #000;
+            background-color: var(--dark-bg);
             display: none;
             flex-direction: column;
             padding: 100px 8% 40px;
@@ -223,7 +225,12 @@
             text-decoration: none;
             font-size: 1.6rem;
             font-weight: 700;
+            transition: color 0.3s;
         }
+        .menu-links a:hover {
+            color: var(--velora-primary);
+        }
+
         .menu-auth {
             margin-top: auto;
             display: flex;
@@ -242,16 +249,17 @@
         }
 
         .signup-btn-large {
-            background-color: #dbb445; 
-            color: #000;
+            background: linear-gradient(135deg, var(--velora-primary), var(--velora-accent));
+            color: #fff;
             text-decoration: none;
             width: 100%;
             padding: 20px;
             text-align: center;
-            border-radius: 18px;
+            border-radius: 50px;
             font-weight: 900;
             font-size: 1.1rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .content-container {
@@ -266,14 +274,18 @@
 
         .main-title {
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 900;
             margin-bottom: 5px;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
             font-size: 1rem;
-            color: #888;
+            color: #a1a1aa;
         }
+
         .signup-form {
             display: flex;
             flex-direction: column;
@@ -290,26 +302,27 @@
         .input-label {
             font-size: 0.8rem;
             font-weight: bold;
-            color: #aaa;
+            color: #a1a1aa;
             letter-spacing: 1px;
         }
 
         .input-group {
             display: flex;
             align-items: center;
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: var(--glass);
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
             transition: 0.3s;
         }
 
         .input-group:focus-within {
-            border-color: rgba(255, 255, 255, 0.3);
+            border-color: var(--velora-primary);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
         }
 
         .input-icon {
             padding: 18px 0 18px 20px;
-            color: #666;
+            color: #6b7280;
             font-size: 1.2rem;
         }
 
@@ -325,10 +338,10 @@
         }
 
         .input-group input::placeholder {
-            color: #666;
+            color: #6b7280;
         }
 
-        /* NEW CARD-STYLE SELECT LAYOUT CSS */
+        /* CARD-STYLE SELECT LAYOUT */
         .plan-cards-container {
             display: flex;
             flex-direction: column;
@@ -338,8 +351,8 @@
         .plan-card {
             display: flex;
             align-items: center;
-            background-color: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background-color: var(--glass);
+            border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 16px 20px;
             cursor: pointer;
@@ -349,18 +362,18 @@
 
         .plan-card:hover {
             background-color: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(99, 102, 241, 0.4);
         }
 
         .plan-card.active {
-            background-color: rgba(219, 180, 69, 0.07);
-            border-color: #dbb445;
-            box-shadow: 0 0 15px rgba(219, 180, 69, 0.1);
+            background-color: rgba(99, 102, 241, 0.08);
+            border-color: var(--velora-primary);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
         }
 
         .plan-card-icon {
             font-size: 1.4rem;
-            color: #666;
+            color: #6b7280;
             margin-right: 16px;
             width: 30px;
             text-align: center;
@@ -368,7 +381,7 @@
         }
 
         .plan-card.active .plan-card-icon {
-            color: #dbb445;
+            color: var(--velora-primary);
         }
 
         .plan-card-details {
@@ -385,12 +398,12 @@
 
         .plan-save-tag {
             font-size: 0.75rem;
-            color: #888;
+            color: #a1a1aa;
             font-weight: 500;
         }
 
         .plan-card.active .plan-save-tag {
-            color: #dbb445;
+            color: var(--velora-primary);
         }
 
         .plan-checkbox {
@@ -400,30 +413,32 @@
         }
 
         .plan-card.active .plan-checkbox {
-            color: #dbb445;
+            color: var(--velora-primary);
             transform: scale(1.1);
         }
 
-        .gold-submit-btn {
+        .velora-submit-btn {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #dbb445; 
-            color: #000;
+            background: linear-gradient(135deg, var(--velora-primary), var(--velora-accent));
+            color: #fff;
             border: none;
             padding: 18px 25px;
-            border-radius: 15px;
+            border-radius: 50px;
             font-size: 1.1rem;
-            font-weight: 900;
+            font-weight: 800;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: 0.3s;
             width: 100%;
             text-transform: uppercase;
             margin-top: 10px;
+            letter-spacing: 1px;
         }
 
-        .gold-submit-btn:hover {
-            background-color: #c9a33b;
+        .velora-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--velora-glow);
         }
 
         .btn-arrow-icon {
@@ -432,7 +447,7 @@
 
         .form-footer {
             text-align: center;
-            color: #ccc;
+            color: #a1a1aa;
             margin-bottom: 60px;
         }
 
@@ -442,7 +457,7 @@
         }
 
         .legal-link {
-            color: #dbb445;
+            color: var(--velora-primary);
             text-decoration: none;
             font-weight: bold;
         }
@@ -461,44 +476,49 @@
     <script>
         const hamburger = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
-
-        // Navbar Menu Toggle
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             mobileMenu.classList.toggle('open');
             document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : 'auto';
         });
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordField = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
 
-        // INTERACTIVE PLAN SELECTION LOGIC
+        togglePassword.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            
+            
+            this.classList.toggle('text-info');
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
+        });
+
         const planCards = document.querySelectorAll('.plan-card');
         const planTracker = document.getElementById('selected-plan-tracker');
 
         planCards.forEach(card => {
             card.addEventListener('click', () => {
-                // Clear active states across all options
                 planCards.forEach(c => c.classList.remove('active'));
-                
-                // Set selection states on clicked item
                 card.classList.add('active');
                 
-                // Update hidden inputs value for submission or storage
                 const planValue = card.getAttribute('data-plan-value');
                 planTracker.value = planValue;
             });
         });
-
-        // Form Submit handler
+        
         const signupForm = document.querySelector('.signup-form');
         signupForm.addEventListener('submit', (e) => {
             e.preventDefault(); 
 
             const usernameInput = document.getElementById('username').value;
             const fullNameInput = document.getElementById('full-name').value;
-            const planInput = planTracker.value; // Reads the updated interactive component tracking string
+            const planInput = planTracker.value; 
 
-            localStorage.setItem('glamour_username', usernameInput);
-            localStorage.setItem('glamour_fullname', fullNameInput);
-            localStorage.setItem('glamour_selected_plan', planInput); 
+            localStorage.setItem('velora_username', usernameInput);
+            localStorage.setItem('velora_fullname', fullNameInput);
+            localStorage.setItem('velora_selected_plan', planInput); 
 
             window.location.href = "dashboard.html"; 
         });
