@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velora | Notifications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --velora-primary: #6366f1;
+            --velora-accent: #a855f7;
+            --velora-glow: rgba(99, 102, 241, 0.4);
+            --dark-bg: #0b0a12;
+            --card-bg: #141221;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text-gray: #a1a1aa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        .notification-container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 25px 20px;
+        }
+
+        /* --- HEADER AREA --- */
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 30px;
+            margin-top: 5px;
+        }
+
+        .back-btn-link {
+            text-decoration: none;
+            color: var(--velora-primary);
+            font-size: 1.3rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--glass);
+            border: 1px solid var(--glass-border);
+        }
+
+        .back-btn-link:hover {
+            color: #fff;
+            background-color: var(--velora-primary);
+            border-color: var(--velora-primary);
+            box-shadow: 0 0 10px var(--velora-glow);
+            transform: scale(1.05);
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- NOTIFICATION TILES --- */
+        .notification-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Telegram Sticky Info Card Style */
+        .telegram-announcement-card {
+            text-decoration: none;
+            display: flex;
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.6) 0%, var(--card-bg) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 20px;
+            padding: 20px;
+            gap: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .telegram-announcement-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--velora-primary);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.15);
+        }
+
+        .external-link-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            transition: color 0.3s;
+        }
+
+        .telegram-announcement-card:hover .external-link-indicator {
+            color: var(--velora-primary);
+        }
+
+        .tg-action-prompt {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Base Notification Card Standard Structure */
+        .notification-card {
+            display: flex;
+            background-color: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            gap: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Left Highlight Strip on unread or specialty states */
+        .notification-card.unread-highlight::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--velora-primary), var(--velora-accent));
+        }
+
+        /* Notification Icons Layout Matrix */
+        .noti-icon-box {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* Individual Icon Accents based on Context */
+        .noti-icon-box.telegram-blue { background: rgba(56, 189, 248, 0.1); color: #38bdf8; }
+        .noti-icon-box.reward-purple { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+        .noti-icon-box.security-amber { background: rgba(234, 179, 8, 0.1); color: #eab308; }
+        .noti-icon-box.system-indigo { background: rgba(99, 102, 241, 0.15); color: #6366f1; }
+
+        .noti-content-box {
+            flex-grow: 1;
+            padding-right: 15px;
+        }
+
+        .noti-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+
+        .noti-description {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            line-height: 1.45;
+            margin-bottom: 12px;
+        }
+
+        .noti-timestamp {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="notification-container">
+        
+        <!-- HEADER ROUTER NAVIGATION CONTROL -->
+        <header class="page-header">
+            <a href="dashboard.html" class="back-btn-link" title="Return to Dashboard">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <h1 class="page-title">Notifications</h1>
+        </header>
+
+        <!-- NOTIFICATION ITERATION DECK -->
+        <section class="notification-stack">
+            
+            <!-- Notification Item 1: Telegram Channels (Hyperlinked Card) -->
+            <a href="https://t.me/" target="_blank" class="telegram-announcement-card">
+                <div class="noti-icon-box telegram-blue">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <div class="noti-content-box">
+                    <h2 class="noti-title">Stay Updated!</h2>
+                    <p class="noti-description">Join our official Telegram channel for the latest news, earning tips, and ecosystem updates.</p>
+                    <div class="tg-action-prompt">Tap to Join</div>
+                </div>
+                <div class="external-link-indicator">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
+            </a>
+
+            <!-- Notification Item 2: Welcome Reward Bonus Package -->
+            <div class="notification-card unread-highlight">
+                <div class="noti-icon-box reward-purple">
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+                <div class="noti-content-box">
+                    <h2 class="noti-title">Welcome Bonus Added!</h2>
+                    <p class="noti-description">Congratulations! Your welcome cashback has been credited to your All Time Earnings.</p>
+                    <div class="noti-timestamp">Just now</div>
+                </div>
+            </div>
+
+            <!-- Notification Item 3: Safety/Activation Verification Alert -->
+            <div class="notification-card">
+                <div class="noti-icon-box security-amber">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="noti-content-box">
+                    <h2 class="noti-title">Security Alert</h2>
+                    <p class="noti-description">Complete your account activation to unlock full withdrawal features.</p>
+                    <div class="noti-timestamp">2 hours ago</div>
+                </div>
+            </div>
+
+            <!-- Notification Item 4: Structural System Optimization Core Update -->
+            <div class="notification-card">
+                <div class="noti-icon-box system-indigo">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <div class="noti-content-box">
+                    <h2 class="noti-title">System Update</h2>
+                    <p class="noti-description">The VELORA-PREMIUM PACKAGE engine has been optimized for faster task processing.</p>
+                    <div class="noti-timestamp">Yesterday</div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
+
