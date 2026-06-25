@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velora | Secure Checkout</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --velora-primary: #6366f1;
+            --velora-accent: #a855f7;
+            --velora-glow: rgba(99, 102, 241, 0.4);
+            --dark-bg: #0b0a12;
+            --card-bg: #131124;
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text-gray: #8e8c9c;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent);
+            color: #ffffff;
+            margin: 0;
+            padding-bottom: 60px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper { 
+            width: 100%;
+            max-width: 480px; 
+            padding: 24px 20px; 
+        }
+
+        /* --- HEADER & TIMER --- */
+        .header-box { text-align: center; margin: 25px 0; }
+        .step-tag { 
+            color: var(--velora-accent); 
+            font-size: 11px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+        }
+        .main-title { 
+            font-size: 1.5rem; 
+            font-weight: 900; 
+            margin-top: 8px; 
+            letter-spacing: -0.5px; 
+        }
+        
+        .timer-container {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 8px 18px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+        #countdown { font-weight: 800; color: var(--velora-primary); font-variant-numeric: tabular-nums; }
+
+        /* --- DYNAMIC PACK SELECTOR CONTROLS --- */
+        .account-toggle-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 4px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            border: 1px solid var(--glass-border);
+        }
+        .toggle-tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .toggle-tab-btn.active {
+            background-color: var(--card-bg);
+            color: #fff;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- VELORA GLASS PAYMENT CARD --- */
+        .payment-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-card::before {
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--velora-primary), var(--velora-accent), transparent);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .info-row:last-child { border: none; }
+
+        .label { 
+            font-size: 10px; 
+            color: var(--text-gray); 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+        }
+        .value { 
+            font-size: 1.05rem; 
+            font-weight: 800; 
+            color: #fff; 
+            margin-top: 4px; 
+        }
+        .value.amt-display {
+            font-size: 1.4rem;
+            color: var(--velora-accent);
+        }
+        
+        .copy-btn { 
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--velora-primary);
+            width: 36px; 
+            height: 36px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            border-radius: 12px;
+            cursor: pointer; 
+            transition: 0.2s;
+            border: 1px solid rgba(99, 102, 241, 0.15);
+        }
+        .copy-btn:hover { 
+            background: var(--velora-primary); 
+            color: #fff; 
+        }
+
+        /* --- CHANNELS & ROUTING INTERFACES --- */
+        .btn-platform {
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 12px;
+            width: 100%; 
+            padding: 16px; 
+            border-radius: 16px;
+            font-weight: 800; 
+            font-size: 0.9rem; 
+            margin-bottom: 18px;
+            border: none; 
+            text-transform: uppercase; 
+            transition: 0.3s; 
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+        .btn-telegram { 
+            background: linear-gradient(135deg, #0088cc, #0077b5); 
+            color: #fff; 
+            box-shadow: 0 6px 15px rgba(0, 136, 204, 0.25); 
+        }
+        .btn-telegram:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 20px rgba(0, 136, 204, 0.4); 
+            color: #fff; 
+        }
+
+        .alert-box {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--glass-border);
+            padding: 20px; 
+            border-radius: 18px;
+            font-size: 0.78rem; 
+            color: var(--text-gray); 
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* --- VELORA HUD NOTIFICATION TOAST --- */
+        #notification-toast {
+            position: fixed; 
+            bottom: 30px; 
+            left: 50%; 
+            transform: translateX(-50%) translateY(150%);
+            background: rgba(19, 17, 36, 0.95);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            backdrop-filter: blur(15px);
+            padding: 14px 22px; 
+            border-radius: 50px;
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+            z-index: 9999; 
+            width: 90%; 
+            max-width: 400px;
+            transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.15);
+        }
+        #notification-toast.show { transform: translateX(-50%) translateY(0); }
+        .toast-icon { color: var(--velora-accent); font-size: 16px; }
+        .toast-content { font-size: 0.8rem; color: #eee; }
+        .toast-content strong { color: var(--velora-primary); }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="header-box">
+        <span class="step-tag">Secure Checkout</span>
+        <h1 class="main-title">Direct Bank Transfer</h1>
+        
+        <div class="timer-container">
+            <i class="fa-regular fa-clock"></i>
+            <span>Expires in: <span id="countdown">10:00</span></span>
+        </div>
+    </div>
+
+    <!-- ACCOUNT ROUTING MATRIX SELECTION PIPELINE -->
+    <div class="account-toggle-row">
+        <button class="toggle-tab-btn active" id="btn-acc-alpha" onclick="switchAccount('alpha')">Account Alpha</button>
+        <button class="toggle-tab-btn" id="btn-acc-beta" onclick="switchAccount('beta')">Account Beta</button>
+    </div>
+
+    <div class="payment-card">
+        <div class="info-row">
+            <div>
+                <span class="label">Amount Payable</span>
+                <div class="value amt-display" id="render-payable-amount">₦9,000</div>
+            </div>
+            <div class="copy-btn" id="copy-amt-trigger">
+                <i class="fa-regular fa-copy"></i>
+            </div>
+        </div>
+
+        <div class="info-row">
+            <div>
+                <span class="label">Receiving Bank</span>
+                <div class="value" id="render-bank-name">MONIEPOINT MFB</div>
+            </div>
+        </div>
+
+        <div class="info-row">
+            <div>
+                <span class="label">Account Number</span>
+                <div class="value" id="render-account-number">9019943096</div>
+            </div>
+            <div class="copy-btn" id="copy-number-trigger">
+                <i class="fa-regular fa-copy"></i>
+            </div>
+        </div>
+
+        <div class="info-row">
+            <div>
+                <span class="label">Account Name</span>
+                <div class="value" id="render-account-name">WONDERFUL ICHUI-UKWE O.</div>
+            </div>
+        </div>
+    </div>
+
+    <p class="action-title text-center mb-3" style="font-size: 11px; font-weight: 700; color: var(--text-gray); letter-spacing: 0.5px;">UPLOAD RECEIPT TO AGENT</p>
+
+    <a href="#" id="telegram-payload-link" target="_blank" class="btn-platform btn-telegram">
+        <i class="fa-paper-plane fa-solid"></i> Submit Proof via Telegram
+    </a>
+
+    <div class="alert-box">
+        <i class="fa-solid fa-shield-halved" style="color: var(--velora-primary); margin-bottom: 10px; font-size: 20px;"></i><br>
+        Your settlement vector is fully encrypted. Once sent, our system verifies the network transaction parameters and updates your account node environment within 2-5 minutes.
+    </div>
+</div>
+
+<!-- Notification Toast -->
+<div id="notification-toast">
+    <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <div class="toast-content" id="toast-text"></div>
+</div>
+
+<!-- JS Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    // System Data Matrix Setup
+    const accountsData = {
+        alpha: {
+            bank: "MONIEPOINT MFB",
+            number: "9019943096",
+            name: "WONDERFUL ICHUI-UKWE O."
+        },
+        beta: {
+            bank: "OPAY DIGITAL BANK",
+            number: "8142337651",
+            name: "VELORA ECOSYSTEM AGENT B"
+        }
+    };
+
+    let selectedPlanPrice = 9000;
+    let selectedPlanLabel = "VELORA PLATINUM";
+    let activeAccountKey = "alpha";
+
+    // 1. Dynamic Plan & Account Layout Synchronization Logic
+    function initializeCheckoutEnvironment() {
+        const rawSelectedPlan = localStorage.getItem('velora_selected_plan') || 'VELORA PLATINUM — ₦9,000';
+        
+        if (rawSelectedPlan.includes("PREMIUM") || rawSelectedPlan.includes("GOLD")) {
+            selectedPlanPrice = 5000;
+            selectedPlanLabel = "VELORA GOLD";
+        } else {
+            selectedPlanPrice = 9000;
+            selectedPlanLabel = "VELORA PLATINUM";
+        }
+
+        document.getElementById("render-payable-amount").innerText = `₦${selectedPlanPrice.toLocaleString()}`;
+        renderActiveAccountDetails();
+    }
+
+    function renderActiveAccountDetails() {
+        const currentAcc = accountsData[activeAccountKey];
+        document.getElementById("render-bank-name").innerText = currentAcc.bank;
+        document.getElementById("render-account-number").innerText = currentAcc.number;
+        document.getElementById("render-account-name").innerText = currentAcc.name;
+
+        // Build Custom URL Request String for Telegram Interfacing
+        const memoText = encodeURIComponent(`I have made payment of ₦${selectedPlanPrice.toLocaleString()} for ${selectedPlanLabel}. Please confirm my payment transaction to my account.`);
+        document.getElementById("telegram-payload-link").href = `https://t.me/glamourverified?text=${memoText}`;
+
+        // Re-attach dynamic listener tracking nodes for accuracy
+        document.getElementById("copy-amt-trigger").onclick = () => executionCopyTarget(selectedPlanPrice, 'Amount');
+        document.getElementById("copy-number-trigger").onclick = () => executionCopyTarget(currentAcc.number, 'Account Number');
+    }
+
+    function switchAccount(accountKey) {
+        activeAccountKey = accountKey;
+        
+        document.getElementById("btn-acc-alpha").classList.remove("active");
+        document.getElementById("btn-acc-beta").classList.remove("active");
+        
+        if (accountKey === 'alpha') {
+            document.getElementById("btn-acc-alpha").classList.add("active");
+        } else {
+            document.getElementById("btn-acc-beta").classList.add("active");
+        }
+        
+        renderActiveAccountDetails();
+    }
+
+    // 2. High Quality SweetAlert Engine
+    function executionCopyTarget(text, label) {
+        navigator.clipboard.writeText(text).then(() => {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                background: '#131124',
+                color: '#fff'
+            });
+            Toast.fire({
+                icon: 'success',
+                title: `${label} copied successfully!`
+            });
+        });
+    }
+
+    // 3. Downstream Countdown Logic
+    function startTimer(duration, display) {
+        let timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration; 
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        initializeCheckoutEnvironment();
+        let tenMinutes = 60 * 10,
+        display = document.querySelector('#countdown');
+        startTimer(tenMinutes, display);
+    };
+
+    // 4. Activity Pulse Notification Array Loop
+    const liveNames = [
+        "Chinedu O.", "Blessing E.", "Abubakar M.", "Tunde W.", "Gift A.", 
+        "Favour Y.", "Emeka J.", "Sarah U.", "Ibrahim K.", "Chioma R.", 
+        "Olawale P.", "Ngozi S.", "David B.", "Precious Q.", "Musa T.", 
+        "Hassan V.", "Anita L.", "Kelvin Z.", "Chinaza D.", "Okon E."
+    ];
+
+    const toastNode = document.getElementById('notification-toast');
+    const toastTextNode = document.getElementById('toast-text');
+
+    function triggerRandomActivityNotification() {
+        const randomName = liveNames[Math.floor(Math.random() * liveNames.length)];
+        const isActivationEvent = Math.random() > 0.5;
+        
+        toastTextNode.innerHTML = isActivationEvent 
+            ? `<strong>${randomName}</strong> just activated ${selectedPlanLabel}! Matrix open.` 
+            : `<strong>${randomName}</strong> just unlocked ₦10,000 Ecosystem Spillover!`;
+
+        toastNode.classList.add('show');
+        setTimeout(() => toastNode.classList.remove('show'), 4000);
+    }
+
+    setInterval(triggerRandomActivityNotification, 9000);
+    setTimeout(triggerRandomActivityNotification, 2000);
+</script>
+
+</body>
+</html>
