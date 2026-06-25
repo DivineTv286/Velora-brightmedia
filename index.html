@@ -52,6 +52,12 @@
         }
         .logo-area { font-weight: 900; font-size: 1.5rem; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; }
         .logo-area span { color: var(--velora-primary); font-size: 1.8rem; }
+        /* Custom Logo Positioning Rule */
+.logo-img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;   
+}
         .nav-link { color: #fff !important; font-weight: 600; font-size: 0.9rem; margin: 0 15px; transition: 0.3s; }
         .nav-link:hover { color: var(--velora-primary) !important; }
 
@@ -261,7 +267,9 @@
 
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="logo-area" href="index.html"><span>V</span> VELORA</a>
+            <a class="logo-area" href="index.html">
+    <img src="logo.png" alt="Velora Logo" class="logo-img"> VELORA
+</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border:none; color:white;">
                 <i class="fa-solid fa-bars-staggered"></i>
             </button>
