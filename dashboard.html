@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velora | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --velora-primary: #6366f1;
+            --velora-accent: #a855f7;
+            --velora-glow: rgba(99, 102, 241, 0.4);
+            --dark-bg: #0b0a12;
+            --card-bg: #131124;
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text-gray: #8e8c9c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            padding-bottom: 90px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Standard Mobile Wrapper based on Screenshot_20260625-172423_Chrome.jpg */
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            padding: 24px 20px;
+            position: relative;
+        }
+
+        /* --- HEADER AREA --- */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .greeting-box .time-greet {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        .greeting-box .user-display-name {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn-link {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .icon-badge-wrapper {
+            width: 44px;
+            height: 44px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .icon-badge-wrapper:hover {
+            border-color: var(--velora-primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            width: 8px;
+            height: 8px;
+            background-color: #ef4444;
+            border-radius: 50%;
+        }
+
+        /* --- MAIN WALLET CARD --- */
+        .wallet-card {
+            background: linear-gradient(135deg, var(--velora-primary), #4338ca);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wallet-card::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+        }
+
+        .wallet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .wallet-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.75);
+            letter-spacing: 0.5px;
+        }
+
+        .tier-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .wallet-balance {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .wallet-meta-text {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .currency-selector-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .currency-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+        }
+
+        .currency-pills {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 3px;
+            border-radius: 50px;
+        }
+
+        .pill-opt {
+            padding: 5px 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.4);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .pill-opt.active {
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* --- GRID UTILITIES / INTERACTION MATRIX --- */
+        .action-matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .matrix-item-link {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+        }
+
+        .matrix-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 18px 10px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .matrix-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--velora-primary);
+        }
+
+        .matrix-icon-wrapper {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Targeted Core Color Accents mirroring Screenshot_20260625-172423_Chrome.jpg structure */
+        .matrix-card.loan .matrix-icon-wrapper { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .matrix-card.v-ai .matrix-icon-wrapper { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .matrix-card.withdraw .matrix-icon-wrapper { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .matrix-card.upgrade .matrix-icon-wrapper { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+
+        .matrix-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #e4e4e7;
+        }
+
+        /* --- STATUS MONITOR TRACKERS --- */
+        .status-monitors-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .monitor-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .monitor-header-icon {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        .monitor-card.membership .monitor-header-icon { color: #3b82f6; }
+        .monitor-card.v-ai-status .monitor-header-icon { color: #10b981; }
+
+        .monitor-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-gray);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .monitor-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .monitor-subtag {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #10b981;
+        }
+
+        /* --- DYNAMIC FLOATING INTERACTIVE COMPONENTS --- */
+        .floating-action-triggers {
+            position: fixed;
+            bottom: 95px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+        }
+        
+        /* Layout logic handles responsive scale to match mobile frame context */
+        @media (min-width: 480px) {
+            .floating-action-triggers {
+                left: calc(50% + 160px);
+            }
+        }
+
+        .floating-circle-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .floating-circle-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .floating-circle-btn.gift-trigger {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .floating-circle-btn.support-trigger {
+            background: linear-gradient(135deg, var(--velora-primary), var(--velora-accent));
+            box-shadow: 0 8px 20px var(--velora-glow);
+        }
+
+        /* --- FIXED BOTTOM NAVIGATION --- */
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background-color: rgba(11, 10, 18, 0.96);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid var(--glass-border);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 12px 0;
+            z-index: 2000;
+        }
+
+        .nav-item-link {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-gray);
+            transition: 0.2s;
+        }
+
+        .nav-item-link.active {
+            color: var(--velora-primary);
+        }
+
+        .nav-item-link i {
+            font-size: 1.2rem;
+        }
+
+        .nav-item-link span {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- HEADER -->
+        <header class="dashboard-header">
+            <div class="greeting-box">
+                <p class="time-greet" id="time-greeting-str">Good evening</p>
+                <h2 class="user-display-name" id="dashboard-user-name">Velora User</h2>
+            </div>
+            <div class="header-actions">
+                <a href="notifications.html" class="icon-btn-link" title="Notifications">
+                    <div class="icon-badge-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <div class="notification-dot"></div>
+                    </div>
+                </a>
+                <a href="profile.html" class="icon-btn-link" title="Profile Configuration">
+                    <div class="icon-badge-wrapper">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                </a>
+            </div>
+        </header>
+
+        <!-- MAIN BALANCE MODULE -->
+        <section class="wallet-card">
+            <div class="wallet-header">
+                <span class="wallet-label">Available Balance</span>
+                <span class="tier-badge" id="dashboard-tier-badge">Platinum Plan</span>
+            </div>
+            <div class="wallet-balance" id="dashboard-balance-display">₦0.00</div>
+            <div class="wallet-meta-text" id="dashboard-reg-date">Joined: Loading Parameters...</div>
+            
+            <div class="currency-selector-row">
+                <span class="currency-label">Select Currency</span>
+                <div class="currency-pills">
+                    <div class="pill-opt active">NGN</div>
+                    <div class="pill-opt">GHS</div>
+                    <div class="pill-opt">XAF</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE UTILITY GRID MATRIX -->
+        <section class="action-matrix-grid">
+            <a href="loans.html" class="matrix-item-link">
+                <div class="matrix-card loan">
+                    <div class="matrix-icon-wrapper">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                    </div>
+                    <span class="matrix-title">Loan</span>
+                </div>
+            </a>
+            
+            <a href="v-ai.html" class="matrix-item-link">
+                <div class="matrix-card v-ai">
+                    <div class="matrix-icon-wrapper">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <span class="matrix-title">V-AI</span>
+                </div>
+            </a>
+            
+            <a href="withdraw.html" class="matrix-item-link">
+                <div class="matrix-card withdraw">
+                    <div class="matrix-icon-wrapper">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <span class="matrix-title">Withdraw</span>
+                </div>
+            </a>
+            
+            <a href="upgrade.html" class="matrix-item-link">
+                <div class="matrix-card upgrade">
+                    <div class="matrix-icon-wrapper">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <span class="matrix-title">Upgrade</span>
+                </div>
+            </a>
+        </section>
+
+        <!-- STATUS TRACKERS SECTION -->
+        <section class="status-monitors-row">
+            <div class="monitor-card membership">
+                <div class="monitor-header-icon">
+                    <i class="fa-regular fa-calendar-check"></i>
+                </div>
+                <p class="monitor-label">Member Since</p>
+                <p class="monitor-value" id="monitor-joined-date">...</p>
+                <p class="monitor-subtag">Account Verified</p>
+            </div>
+
+            <div class="monitor-card v-ai-status">
+                <div class="monitor-header-icon">
+                    <i class="fa-solid fa-circle-nodes"></i>
+                </div>
+                <p class="monitor-label">V-AI Status</p>
+                <p class="monitor-value" style="color: #10b981;">Online</p>
+                <p class="monitor-subtag">System Operational</p>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE FLOATING TRIGGERS -->
+        <div class="floating-action-triggers">
+            <a href="rewards.html" class="floating-circle-btn gift-trigger" title="Claim Rewards / Perks">
+                <i class="fa-solid fa-gift"></i>
+            </a>
+            <a href="https://t.me/OLAMIMEDIA" target="_blank" class="floating-circle-btn support-trigger" title="Connect with Support">
+                <i class="fa-regular fa-comment-dots"></i>
+            </a>
+        </div>
+
+        <!-- STICKY STRUCTURAL BOTTOM NAVIGATION LAYOUT -->
+        <nav class="bottom-navbar">
+            <a href="dashboard.html" class="nav-item-link active">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            <a href="v-earn.html" class="nav-item-link">
+                <i class="fa-solid fa-circle-play"></i>
+                <span>V-Earn</span>
+            </a>
+            <a href="nextask.html" class="nav-item-link">
+                <i class="fa-solid fa-list-check"></i>
+                <span>NextTask</span>
+            </a>
+            <a href="profile.html" class="nav-item-link">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Me</span>
+            </a>
+        </nav>
+
+    </div>
+
+    <!-- DYNAMIC CONTROLLER LOGIC ENGINE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Greeting update loop matching typical diurnal schedules
+            const hour = new Date().getHours();
+            const greetStr = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+            document.getElementById("time-greeting-str").innerText = greetStr;
+
+            // Extract serialized configuration states from cache or set fallback defaults
+            const cachedName = localStorage.getItem('velora_fullname') || 'Nexora';
+            const selectedPlanRaw = localStorage.getItem('velora_selected_plan') || 'VELORA PLATINUM — ₦9,000';
+            
+            document.getElementById("dashboard-user-name").innerText = cachedName;
+
+            // Evaluate Registration Date string logic injection parameters
+            let entryDate = localStorage.getItem('velora_registration_date');
+            if (!entryDate) {
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                entryDate = new Date().toLocaleDateString('en-US', options);
+                localStorage.setItem('velora_registration_date', entryDate);
+            }
+            
+            document.getElementById("dashboard-reg-date").innerText = `Joined: ${entryDate}`;
+            document.getElementById("monitor-joined-date").innerText = entryDate;
+
+            // Core Cashback Evaluation Engine
+            let calculatedBalance = "₦0.00";
+            let targetedBadgeStr = "Platinum Access";
+
+            if (selectedPlanRaw.includes("PREMIUM") || selectedPlanRaw.includes("GOLD")) {
+                calculatedBalance = "₦12,000.00";
+                targetedBadgeStr = "Premium Access";
+            } else {
+                calculatedBalance = "₦8,000.00";
+                targetedBadgeStr = "Platinum Access";
+            }
+
+            // Sync generated architecture values to DOM elements safely
+            document.getElementById("dashboard-balance-display").innerText = calculatedBalance;
+            document.getElementById("dashboard-tier-badge").innerText = targetedBadgeStr;
+
+            // Handle Currency switcher interaction presentation states
+            const currencyPills = document.querySelectorAll(".pill-opt");
+            currencyPills.forEach(pill => {
+                pill.addEventListener("click", () => {
+                    currencyPills.forEach(p => p.classList.remove("active"));
+                    pill.classList.add("active");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
