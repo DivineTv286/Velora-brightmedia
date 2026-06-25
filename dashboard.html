@@ -7,18 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;900&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --velora-primary: #6366f1;
             --velora-accent: #a855f7;
             --velora-glow: rgba(99, 102, 241, 0.4);
             --dark-bg: #0b0a12;
-            --card-bg: #141221;
-            --glass: rgba(255, 255, 255, 0.03);
+            --card-bg: #131124;
             --glass-border: rgba(255, 255, 255, 0.06);
-            --text-gray: #a1a1aa;
+            --text-gray: #8e8c9c;
         }
 
         * {
@@ -32,35 +30,39 @@
         body {
             background-color: var(--dark-bg);
             color: #fff;
+            padding-bottom: 90px;
             min-height: 100vh;
-            padding-bottom: 90px; /* Space for fixed bottom nav */
+            display: flex;
+            justify-content: center;
         }
 
-        .dashboard-container {
+        /* Standard Mobile Wrapper based on Screenshot_20260625-172423_Chrome.jpg */
+        .app-container {
+            width: 100%;
             max-width: 480px;
-            margin: 0 auto;
-            padding: 25px 20px;
+            padding: 24px 20px;
+            position: relative;
         }
 
         /* --- HEADER AREA --- */
-        .header-area {
+        .dashboard-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
         }
 
-        .greeting-box .time-text {
+        .greeting-box .time-greet {
             font-size: 0.9rem;
             color: var(--text-gray);
             font-weight: 500;
         }
 
-        .greeting-box .user-name {
+        .greeting-box .user-display-name {
             font-size: 1.6rem;
             font-weight: 900;
-            letter-spacing: 0.5px;
             margin-top: 2px;
+            letter-spacing: 0.5px;
         }
 
         .header-actions {
@@ -70,46 +72,39 @@
 
         .icon-btn-link {
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
+            color: #fff;
+        }
+
+        .icon-badge-wrapper {
+            width: 44px;
+            height: 44px;
             background-color: var(--card-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 50%;
-            color: #fff;
-            font-size: 1.1rem;
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .icon-btn-link:hover {
-            border-color: var(--velora-primary);
-            color: var(--velora-primary);
-            box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .notification-badge {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            background-color: #ef4444;
-            color: white;
-            font-size: 0.65rem;
-            font-weight: bold;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid var(--dark-bg);
-            animation: pulse 2s infinite;
+            font-size: 1.1rem;
+            position: relative;
+            transition: 0.3s;
         }
 
-        @keyframes pulse {
+        .icon-badge-wrapper:hover {
+            border-color: var(--velora-primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            width: 8px;
+            height: 8px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
@@ -117,196 +112,213 @@
 
         /* --- MAIN WALLET CARD --- */
         .wallet-card {
-            background: linear-gradient(135deg, #1e1b4b 0%, #110f1c 100%);
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: linear-gradient(135deg, var(--velora-primary), #4338ca);
             border-radius: 24px;
             padding: 25px;
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
             margin-bottom: 25px;
             position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .wallet-card::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
         }
 
         .wallet-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .wallet-label {
             font-size: 0.85rem;
-            color: #cbd5e1;
             font-weight: 500;
+            color: rgba(255, 255, 255, 0.75);
             letter-spacing: 0.5px;
         }
 
-        .plan-badge {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+        .tier-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
             padding: 6px 14px;
             border-radius: 50px;
             font-size: 0.75rem;
             font-weight: 700;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #fff;
         }
 
         .wallet-balance {
             font-size: 2.2rem;
             font-weight: 900;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             letter-spacing: -0.5px;
         }
 
-        .registration-date {
+        .wallet-meta-text {
             font-size: 0.8rem;
-            color: var(--text-gray);
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
             margin-bottom: 20px;
         }
 
-        /* Currency Selector */
-        .currency-selector {
+        .currency-selector-row {
             display: flex;
             align-items: center;
             gap: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 5px;
-            border-radius: 50px;
-            width: fit-content;
-            border: 1px solid var(--glass-border);
         }
 
         .currency-label {
             font-size: 0.75rem;
-            color: var(--text-gray);
-            padding-left: 10px;
             font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
         }
 
-        .currency-tabs {
+        .currency-pills {
             display: flex;
-            gap: 2px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 3px;
+            border-radius: 50px;
         }
 
-        .currency-tab {
-            font-size: 0.75rem;
+        .pill-opt {
+            padding: 5px 12px;
+            font-size: 0.7rem;
             font-weight: 700;
-            padding: 6px 14px;
+            color: rgba(255, 255, 255, 0.4);
             border-radius: 50px;
             cursor: pointer;
-            color: var(--text-gray);
             transition: 0.2s;
         }
 
-        .currency-tab.active {
+        .pill-opt.active {
             background-color: #fff;
             color: #000;
         }
 
-        /* --- NAVIGATION ACTION HUB GRID --- */
-        .action-hub-grid {
+        /* --- GRID UTILITIES / INTERACTION MATRIX --- */
+        .action-matrix-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
             margin-bottom: 25px;
         }
 
-        .action-card {
+        .matrix-item-link {
             text-decoration: none;
+            color: #fff;
+            display: block;
+        }
+
+        .matrix-card {
             background-color: var(--card-bg);
             border: 1px solid var(--glass-border);
             border-radius: 18px;
             padding: 18px 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
+            text-align: center;
+            transition: 0.3s;
         }
 
-        .action-card:hover {
-            border-color: var(--velora-primary);
+        .matrix-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.15);
+            border-color: var(--velora-primary);
         }
 
-        .action-icon-wrapper {
+        .matrix-icon-wrapper {
             width: 44px;
             height: 44px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto 10px;
             font-size: 1.1rem;
         }
 
-        /* Layout Accent Colors based on standard UX mapping */
-        .action-card:nth-child(1) .action-icon-wrapper { background: rgba(234, 179, 8, 0.1); color: #eab308; } /* Loan */
-        .action-card:nth-child(2) .action-icon-wrapper { background: rgba(99, 102, 241, 0.1); color: #6366f1; } /* V-AI */
-        .action-card:nth-child(3) .action-icon-wrapper { background: rgba(168, 85, 247, 0.1); color: #a855f7; } /* Upgrade */
-        .action-card:nth-child(4) .action-icon-wrapper { background: rgba(34, 197, 94, 0.1); color: #22c55e; } /* Withdraw */
+        /* Targeted Core Color Accents mirroring Screenshot_20260625-172423_Chrome.jpg structure */
+        .matrix-card.loan .matrix-icon-wrapper { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .matrix-card.v-ai .matrix-icon-wrapper { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .matrix-card.withdraw .matrix-icon-wrapper { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .matrix-card.upgrade .matrix-icon-wrapper { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
 
-        .action-title {
+        .matrix-title {
             font-size: 0.75rem;
             font-weight: 600;
-            color: #cbd5e1;
-            letter-spacing: 0.3px;
+            color: #e4e4e7;
         }
 
-        /* --- STATS INFO SECTION --- */
-        .info-cards-row {
+        /* --- STATUS MONITOR TRACKERS --- */
+        .status-monitors-row {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
 
-        .info-card {
+        .monitor-card {
             background-color: var(--card-bg);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 20px;
         }
 
-        .info-card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .monitor-header-icon {
+            font-size: 1.2rem;
             margin-bottom: 15px;
-            color: var(--velora-primary);
-            font-size: 1.1rem;
+        }
+        .monitor-card.membership .monitor-header-icon { color: #3b82f6; }
+        .monitor-card.v-ai-status .monitor-header-icon { color: #10b981; }
+
+        .monitor-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-gray);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .info-card-label {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+        .monitor-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
             margin-bottom: 4px;
         }
 
-        .info-card-value {
-            font-size: 1rem;
-            font-weight: 700;
+        .monitor-subtag {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #10b981;
         }
 
-        .status-active {
-            color: #22c55e;
-            font-weight: 700;
-        }
-
-        /* --- FLOATING ACTIONS CONTAINER --- */
-        .floating-actions-container {
+        /* --- DYNAMIC FLOATING INTERACTIVE COMPONENTS --- */
+        .floating-action-triggers {
             position: fixed;
-            bottom: 100px;
+            bottom: 95px;
             right: 20px;
             display: flex;
             flex-direction: column;
             gap: 12px;
-            z-index: 999;
+            z-index: 1000;
+        }
+        
+        /* Layout logic handles responsive scale to match mobile frame context */
+        @media (min-width: 480px) {
+            .floating-action-triggers {
+                left: calc(50% + 160px);
+            }
         }
 
-        .floating-btn {
+        .floating-circle-btn {
             width: 56px;
             height: 56px;
             border-radius: 50%;
@@ -314,39 +326,42 @@
             align-items: center;
             justify-content: center;
             font-size: 1.3rem;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-            transition: 0.3s;
-            border: none;
             color: #fff;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: 0.3s;
+            text-decoration: none;
         }
 
-        .floating-btn:hover {
-            transform: scale(1.08) translateY(-2px);
+        .floating-circle-btn:hover {
+            transform: scale(1.05);
         }
 
-        .gift-btn {
-            background: linear-gradient(135deg, #22c55e, #06b6d4);
+        .floating-circle-btn.gift-trigger {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
         }
 
-        .chat-btn {
+        .floating-circle-btn.support-trigger {
             background: linear-gradient(135deg, var(--velora-primary), var(--velora-accent));
+            box-shadow: 0 8px 20px var(--velora-glow);
         }
 
         /* --- FIXED BOTTOM NAVIGATION --- */
-        .bottom-nav-bar {
+        .bottom-navbar {
             position: fixed;
             bottom: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
-            background-color: rgba(11, 10, 18, 0.92);
+            max-width: 480px;
+            background-color: rgba(11, 10, 18, 0.96);
             backdrop-filter: blur(15px);
             border-top: 1px solid var(--glass-border);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             padding: 12px 0;
-            z-index: 1000;
+            z-index: 2000;
         }
 
         .nav-item-link {
@@ -354,10 +369,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
-            color: #6b7280;
-            transition: all 0.3s;
-            flex-grow: 1;
+            gap: 5px;
+            color: var(--text-gray);
+            transition: 0.2s;
+        }
+
+        .nav-item-link.active {
+            color: var(--velora-primary);
         }
 
         .nav-item-link i {
@@ -365,187 +383,197 @@
         }
 
         .nav-item-link span {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
             letter-spacing: 0.3px;
-        }
-
-        .nav-item-link.active {
-            color: var(--velora-primary);
-            text-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
-        }
-
-        .nav-item-link:hover {
-            color: #fff;
         }
     </style>
 </head>
 <body>
 
-    <main class="dashboard-container">
+    <div class="app-container">
         
-        <!-- HEADER SECTION -->
-        <header class="header-area">
+        <!-- HEADER -->
+        <header class="dashboard-header">
             <div class="greeting-box">
-                <div class="time-text" id="time-greeting">Good evening</div>
-                <div class="user-name" id="display-name">Creator</div>
+                <p class="time-greet" id="time-greeting-str">Good evening</p>
+                <h2 class="user-display-name" id="dashboard-user-name">Velora User</h2>
             </div>
             <div class="header-actions">
-                <!-- Hyperlinked Notification Icon -->
                 <a href="notifications.html" class="icon-btn-link" title="Notifications">
-                    <i class="fa-regular fa-bell"></i>
-                    <div class="notification-badge">1</div>
+                    <div class="icon-badge-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <div class="notification-dot"></div>
+                    </div>
                 </a>
-                <!-- Hyperlinked Profile Icon -->
                 <a href="profile.html" class="icon-btn-link" title="Profile Configuration">
-                    <i class="fa-regular fa-user"></i>
+                    <div class="icon-badge-wrapper">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
                 </a>
             </div>
         </header>
 
-        <!-- BALANCE AND BLOCK LICENSE PROFILE CARD -->
+        <!-- MAIN BALANCE MODULE -->
         <section class="wallet-card">
             <div class="wallet-header">
                 <span class="wallet-label">Available Balance</span>
-                <span class="plan-badge" id="display-plan">Premium Plan</span>
+                <span class="tier-badge" id="dashboard-tier-badge">Platinum Plan</span>
             </div>
-            <div class="wallet-balance" id="display-balance">₦14,500.00</div>
-            <div class="registration-date" id="display-joined-date">Joined: June 25, 2026</div>
-
-            <div class="currency-selector">
+            <div class="wallet-balance" id="dashboard-balance-display">₦0.00</div>
+            <div class="wallet-meta-text" id="dashboard-reg-date">Joined: Loading Parameters...</div>
+            
+            <div class="currency-selector-row">
                 <span class="currency-label">Select Currency</span>
-                <div class="currency-tabs">
-                    <div class="currency-tab active">NGN</div>
-                    <div class="currency-tab">GHS</div>
-                    <div class="currency-tab">XAF</div>
+                <div class="currency-pills">
+                    <div class="pill-opt active">NGN</div>
+                    <div class="pill-opt">GHS</div>
+                    <div class="pill-opt">XAF</div>
                 </div>
             </div>
         </section>
 
-        <!-- UTILITY CONTROL INFRASTRUCTURE GRID -->
-        <nav class="action-hub-grid">
-            <a href="loans.html" class="action-card">
-                <div class="action-icon-wrapper">
-                    <i class="fa-solid fa-hand-holding-dollar"></i>
+        <!-- CORE UTILITY GRID MATRIX -->
+        <section class="action-matrix-grid">
+            <a href="loans.html" class="matrix-item-link">
+                <div class="matrix-card loan">
+                    <div class="matrix-icon-wrapper">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                    </div>
+                    <span class="matrix-title">Loan</span>
                 </div>
-                <span class="action-title">Loan</span>
             </a>
-            <a href="v-ai.html" class="action-card">
-                <div class="action-icon-wrapper">
-                    <i class="fa-solid fa-microchip"></i>
+            
+            <a href="v-ai.html" class="matrix-item-link">
+                <div class="matrix-card v-ai">
+                    <div class="matrix-icon-wrapper">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <span class="matrix-title">V-AI</span>
                 </div>
-                <span class="action-title">V-AI</span>
             </a>
-            <a href="upgrade.html" class="action-card">
-                <div class="action-icon-wrapper">
-                    <i class="fa-solid fa-circle-up"></i>
+            
+            <a href="withdraw.html" class="matrix-item-link">
+                <div class="matrix-card withdraw">
+                    <div class="matrix-icon-wrapper">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <span class="matrix-title">Withdraw</span>
                 </div>
-                <span class="action-title">Upgrade</span>
             </a>
-            <a href="withdraw.html" class="action-card">
-                <div class="action-icon-wrapper">
-                    <i class="fa-solid fa-wallet"></i>
+            
+            <a href="upgrade.html" class="matrix-item-link">
+                <div class="matrix-card upgrade">
+                    <div class="matrix-icon-wrapper">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <span class="matrix-title">Upgrade</span>
                 </div>
-                <span class="action-title">Withdraw</span>
+            </a>
+        </section>
+
+        <!-- STATUS TRACKERS SECTION -->
+        <section class="status-monitors-row">
+            <div class="monitor-card membership">
+                <div class="monitor-header-icon">
+                    <i class="fa-regular fa-calendar-check"></i>
+                </div>
+                <p class="monitor-label">Member Since</p>
+                <p class="monitor-value" id="monitor-joined-date">...</p>
+                <p class="monitor-subtag">Account Verified</p>
+            </div>
+
+            <div class="monitor-card v-ai-status">
+                <div class="monitor-header-icon">
+                    <i class="fa-solid fa-circle-nodes"></i>
+                </div>
+                <p class="monitor-label">V-AI Status</p>
+                <p class="monitor-value" style="color: #10b981;">Online</p>
+                <p class="monitor-subtag">System Operational</p>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE FLOATING TRIGGERS -->
+        <div class="floating-action-triggers">
+            <a href="rewards.html" class="floating-circle-btn gift-trigger" title="Claim Rewards / Perks">
+                <i class="fa-solid fa-gift"></i>
+            </a>
+            <a href="https://t.me/OLAMIMEDIA" target="_blank" class="floating-circle-btn support-trigger" title="Connect with Support">
+                <i class="fa-regular fa-comment-dots"></i>
+            </a>
+        </div>
+
+        <!-- STICKY STRUCTURAL BOTTOM NAVIGATION LAYOUT -->
+        <nav class="bottom-navbar">
+            <a href="dashboard.html" class="nav-item-link active">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            <a href="v-earn.html" class="nav-item-link">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <span>Loan</span>
+            </a>
+            <a href="nextask.html" class="nav-item-link">
+                <i class="fa-solid fa-circle-play"></i>
+            <span>Y-Earn</span>
+            </a>
+            <a href="profile.html" class="nav-item-link">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Me</span>
             </a>
         </nav>
 
-        <!-- ANALYTICAL PLACEMENT MATRIX DATA -->
-        <section class="info-cards-row">
-            <div class="info-card">
-                <div class="info-card-header">
-                    <i class="fa-solid fa-user-shield"></i>
-                </div>
-                <div class="info-card-label">Member Since</div>
-                <div class="info-card-value" id="display-member-since">June 25, 2026</div>
-                <div class="info-card-label" style="margin-top: 10px; font-size: 0.65rem;">Account Status</div>
-                <div class="status-active" style="font-size: 0.85rem;">Account Verified</div>
-            </div>
-
-            <div class="info-card">
-                <div class="info-card-header" style="color: #06b6d4;">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <div class="info-card-label">V-AI Status</div>
-                <div class="info-card-value status-active">Online</div>
-                <div class="info-card-label" style="margin-top: 10px; font-size: 0.65rem;">Engine Node</div>
-                <div style="font-size: 0.85rem; color: var(--text-gray); font-weight: 600;">Active Matrix</div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FLOATING PACK ACTIONS (Gift and Support Chat) -->
-    <div class="floating-actions-container">
-        <div class="floating-btn gift-btn" title="Claim Rewards Bundle" onclick="location.href='rewards.html'">
-            <i class="fa-solid fa-gift"></i>
-        </div>
-        <div class="floating-btn chat-btn" title="Support Integration" onclick="location.href='support.html'">
-            <i class="fa-regular fa-comment-dots"></i>
-        </div>
     </div>
 
-    <!-- BOTTOM FIXED ROUTER BAR NAVIGATION -->
-    <nav class="bottom-nav-bar">
-        <a href="dashboard.html" class="nav-item-link active">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-        </a>
-        <a href="#" class="nav-item-link">
-            <i class="fa-solid fa-microchip"></i>
-            <span>V-AI</span>
-        </a>
-        <a href="loans.html" class="nav-item-link">
-            <i class="fa-solid fa-hand-holding-dollar"></i>
-            <span>Loans</span>
-        </a>
-        <a href="profile.html" class="nav-item-link">
-            <i class="fa-solid fa-circle-user"></i>
-            <span>Me</span>
-        </a>
-    </nav>
-
+    <!-- DYNAMIC CONTROLLER LOGIC ENGINE -->
     <script>
-        // Dynamic Setup Engine Execution
         document.addEventListener("DOMContentLoaded", () => {
+            // Greeting update loop matching typical diurnal schedules
+            const hour = new Date().getHours();
+            const greetStr = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+            document.getElementById("time-greeting-str").innerText = greetStr;
+
+            // Extract serialized configuration states from cache or set fallback defaults
+            const cachedName = localStorage.getItem('velora_fullname') || 'Nexora';
+            const selectedPlanRaw = localStorage.getItem('velora_selected_plan') || 'VELORA PLATINUM — ₦9,000';
             
-            // 1. GREETING MANAGER BY TIME SEQUENCE
-            const greetingElement = document.getElementById('time-greeting');
-            const currentHour = new Date().getHours();
+            document.getElementById("dashboard-user-name").innerText = cachedName;
+
+            // Evaluate Registration Date string logic injection parameters
+            let entryDate = localStorage.getItem('velora_registration_date');
+            if (!entryDate) {
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                entryDate = new Date().toLocaleDateString('en-US', options);
+                localStorage.setItem('velora_registration_date', entryDate);
+            }
             
-            if (currentHour >= 0 && currentHour < 12) {
-                greetingElement.textContent = "Good morning";
-            } else if (currentHour >= 12 && currentHour < 17) {
-                greetingElement.textContent = "Good afternoon";
+            document.getElementById("dashboard-reg-date").innerText = `Joined: ${entryDate}`;
+            document.getElementById("monitor-joined-date").innerText = entryDate;
+
+            // Core Cashback Evaluation Engine
+            let calculatedBalance = "₦0.00";
+            let targetedBadgeStr = "Platinum Access";
+
+            if (selectedPlanRaw.includes("PREMIUM") || selectedPlanRaw.includes("GOLD")) {
+                calculatedBalance = "₦12,000.00";
+                targetedBadgeStr = "Premium Access";
             } else {
-                greetingElement.textContent = "Good evening";
+                calculatedBalance = "₦8,000.00";
+                targetedBadgeStr = "Platinum Access";
             }
 
-            // 2. USER DATA STORAGE PIPELINE INTERACTION
-            const savedName = localStorage.getItem('velora_fullname') || "Nexora";
-            const savedPlan = localStorage.getItem('velora_selected_plan') || "VELORA PREMIUM — ₦14,500";
+            // Sync generated architecture values to DOM elements safely
+            document.getElementById("dashboard-balance-display").innerText = calculatedBalance;
+            document.getElementById("dashboard-tier-badge").innerText = targetedBadgeStr;
 
-            document.getElementById('display-name').textContent = savedName.split(' ')[0];
-
-            // 3. ACCOUNT PLAN AND REWARD MATRIX MATCHING
-            const balanceElement = document.getElementById('display-balance');
-            const planElement = document.getElementById('display-plan');
-
-            if (savedPlan.includes("PLATINUM")) {
-                planElement.textContent = "Platinum Access";
-                balanceElement.textContent = "₦8,000.00";
-            } else {
-                // Default fallback to Premium/Gold structural pricing rules
-                planElement.textContent = "Premium Access";
-                balanceElement.textContent = "₦12,000.00";
-            }
-
-            // 4. PERSISTENT REGISTRATION SEQUENCE TIMESTAMPS
-            const options = { year: 'numeric', month: 'short', day: 'numeric' };
-            const todayFormatted = new Date().toLocaleDateString('en-US', options);
-
-            document.getElementById('display-joined-date').textContent = `Registered On: ${todayFormatted}`;
-            document.getElementById('display-member-since').textContent = todayFormatted;
+            // Handle Currency switcher interaction presentation states
+            const currencyPills = document.querySelectorAll(".pill-opt");
+            currencyPills.forEach(pill => {
+                pill.addEventListener("click", () => {
+                    currencyPills.forEach(p => p.classList.remove("active"));
+                    pill.classList.add("active");
+                });
+            });
         });
     </script>
 </body>
