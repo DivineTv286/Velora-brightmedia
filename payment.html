@@ -253,8 +253,8 @@
 
     <!-- ACCOUNT ROUTING MATRIX SELECTION PIPELINE -->
     <div class="account-toggle-row">
-        <button class="toggle-tab-btn active" id="btn-acc-alpha" onclick="switchAccount('alpha')">Account Alpha</button>
-        <button class="toggle-tab-btn" id="btn-acc-beta" onclick="switchAccount('beta')">Account Beta</button>
+        <button class="toggle-tab-btn active" id="btn-acc-alpha" onclick="switchAccount('alpha')">VELORA PLATINUM</button>
+        <button class="toggle-tab-btn" id="btn-acc-beta" onclick="switchAccount('beta')">VELORA GOLD</button>
     </div>
 
     <div class="payment-card">
@@ -278,7 +278,7 @@
         <div class="info-row">
             <div>
                 <span class="label">Account Number</span>
-                <div class="value" id="render-account-number">9019943096</div>
+                <div class="value" id="render-account-number">6650408736</div>
             </div>
             <div class="copy-btn" id="copy-number-trigger">
                 <i class="fa-regular fa-copy"></i>
@@ -288,7 +288,7 @@
         <div class="info-row">
             <div>
                 <span class="label">Account Name</span>
-                <div class="value" id="render-account-name">WONDERFUL ICHUI-UKWE O.</div>
+                <div class="value" id="render-account-name">MUJEEB SULEIMAN</div>
             </div>
         </div>
     </div>
@@ -301,7 +301,7 @@
 
     <div class="alert-box">
         <i class="fa-solid fa-shield-halved" style="color: var(--velora-primary); margin-bottom: 10px; font-size: 20px;"></i><br>
-        Your settlement vector is fully encrypted. Once sent, our system verifies the network transaction parameters and updates your account node environment within 2-5 minutes.
+        Your payment is fully encrypted. Once sent, our system verifies the network transaction parameters and updates your account node environment within 2-5 minutes.
     </div>
 </div>
 
@@ -319,13 +319,13 @@
     const accountsData = {
         alpha: {
             bank: "MONIEPOINT MFB",
-            number: "9019943096",
-            name: "WONDERFUL ICHUI-UKWE O."
+            number: "6650408736",
+            name: "MUJEEB SULEIMAN"
         },
         beta: {
-            bank: "OPAY DIGITAL BANK",
-            number: "8142337651",
-            name: "VELORA ECOSYSTEM AGENT B"
+            bank: "PALMPAY",
+            number: "8926075527",
+            name: "MUJEEB SULEIMAN"
         }
     };
 
@@ -338,7 +338,7 @@
         const rawSelectedPlan = localStorage.getItem('velora_selected_plan') || 'VELORA PLATINUM — ₦9,000';
         
         if (rawSelectedPlan.includes("PREMIUM") || rawSelectedPlan.includes("GOLD")) {
-            selectedPlanPrice = 5000;
+            selectedPlanPrice = 14500;
             selectedPlanLabel = "VELORA GOLD";
         } else {
             selectedPlanPrice = 9000;
@@ -357,7 +357,7 @@
 
         // Build Custom URL Request String for Telegram Interfacing
         const memoText = encodeURIComponent(`I have made payment of ₦${selectedPlanPrice.toLocaleString()} for ${selectedPlanLabel}. Please confirm my payment transaction to my account.`);
-        document.getElementById("telegram-payload-link").href = `https://t.me/glamourverified?text=${memoText}`;
+        document.getElementById("telegram-payload-link").href = `https://t.me/OLAMIMEDIA?text=${memoText}`;
 
         // Re-attach dynamic listener tracking nodes for accuracy
         document.getElementById("copy-amt-trigger").onclick = () => executionCopyTarget(selectedPlanPrice, 'Amount');
