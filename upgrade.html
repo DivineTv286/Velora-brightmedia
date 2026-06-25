@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velora | Activate Account</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --velora-primary: #6366f1;
+            --velora-accent: #a855f7;
+            --velora-glow: rgba(99, 102, 241, 0.4);
+            --dark-bg: #0b0a12;
+            --card-bg: #131124;
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text-gray: #8e8c9c;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            margin: 0;
+            padding-bottom: 50px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper { 
+            width: 100%;
+            max-width: 480px; 
+            padding: 24px 20px; 
+        }
+
+        /* --- HEADER AREA --- */
+        .brand-header { 
+            text-align: center; 
+            margin: 20px 0 30px; 
+        }
+        .brand-header h2 {
+            font-size: 1.6rem;
+            font-weight: 900; 
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff, var(--text-gray));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- DYNAMIC PLAN CARD --- */
+        .plan-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 24px;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+        
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: -75px;
+            right: -75px;
+            width: 150px;
+            height: 150px;
+            background: rgba(168, 85, 247, 0.05);
+            border-radius: 50%;
+            filter: blur(20px);
+        }
+
+        .current-badge {
+            position: absolute; 
+            top: 0; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, var(--velora-primary), var(--velora-accent));
+            color: #fff; 
+            font-size: 10px;
+            font-weight: 800; 
+            padding: 6px 18px; 
+            border-radius: 50px; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px var(--velora-glow);
+        }
+        
+        .plan-name { 
+            font-size: 1.1rem; 
+            font-weight: 800; 
+            color: var(--velora-accent); 
+            display: block;
+            margin-top: 5px;
+            letter-spacing: 0.5px;
+        }
+        
+        .plan-price { 
+            font-size: 2.3rem; 
+            font-weight: 900; 
+            margin: 12px 0 25px; 
+            letter-spacing: -1px;
+        }
+        
+        /* --- DYNAMIC BENEFIT MATRIX --- */
+        .benefit-list { 
+            text-align: left; 
+            margin: 20px 0 30px; 
+            list-style: none; 
+            padding: 0; 
+        }
+        
+        .benefit-list li { 
+            font-size: 0.85rem; 
+            margin-bottom: 14px; 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 12px;
+            color: #e4e4e7;
+            line-height: 1.4;
+        }
+        
+        .benefit-list li i { 
+            color: var(--velora-primary); 
+            font-size: 1.05rem; 
+            margin-top: 2px;
+        }
+
+        .btn-pay {
+            background: linear-gradient(135deg, var(--velora-primary), var(--velora-accent)); 
+            color: #fff; 
+            border: none;
+            width: 100%; 
+            padding: 16px; 
+            border-radius: 16px;
+            font-weight: 800; 
+            font-size: 0.95rem; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 20px var(--velora-glow);
+            transition: 0.3s;
+        }
+
+        .btn-pay:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+        }
+
+        /* --- ACCORDION FAQ SECTION --- */
+        .faq-section { margin-top: 35px; }
+        .faq-title { 
+            font-size: 0.95rem; 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            color: var(--text-gray); 
+            text-align: center; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .faq-item {
+            background: var(--card-bg); 
+            border: 1px solid var(--glass-border);
+            border-radius: 16px; 
+            padding: 16px; 
+            margin-bottom: 12px;
+        }
+        
+        .faq-q-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #fff;
+            text-align: left;
+            font-size: 0.88rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            outline: none;
+            padding: 0;
+        }
+        
+        .faq-q-btn i {
+            font-size: 0.8rem;
+            transition: 0.3s;
+            color: var(--velora-primary);
+        }
+
+        .faq-q-btn:not(.collapsed) i {
+            transform: rotate(180deg);
+            color: var(--velora-accent);
+        }
+
+        .faq-a {
+            padding-top: 12px;
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        /* --- INTEGRATED GLASS MODAL SYSTEM --- */
+        .velora-alert-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(5, 4, 8, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .velora-alert-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .velora-alert-modal {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            width: 100%;
+            max-width: 360px;
+            border-radius: 24px;
+            padding: 30px 24px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+            transform: scale(0.85);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .velora-alert-overlay.show .velora-alert-modal {
+            transform: scale(1);
+        }
+
+        .velora-alert-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--velora-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--velora-primary);
+            margin: 0 auto 20px;
+        }
+
+        .velora-alert-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .velora-alert-msg {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .velora-popup-btn {
+            background: linear-gradient(135deg, var(--velora-primary), var(--velora-accent));
+            border: none;
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 5px 15px var(--velora-glow);
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="brand-header">
+        <h2>VELORA ECOSYSTEM</h2>
+    </div>
+
+    <!-- MAIN INTERACTIVE SUBSCRIPTION DISPATCHER -->
+    <div class="plan-card">
+        <div class="current-badge">Recommended Tier</div>
+        <span class="plan-name" id="package-title-node">VELORA PLATINUM PACKAGE</span>
+        <div class="plan-price" id="package-cost-node">₦9,000</div>
+        
+        <!-- Target container initialized dynamically by runtime script -->
+        <ul class="benefit-list" id="package-benefits-matrix">
+            <!-- Dynamic Assets Injected Here -->
+        </ul>
+
+        <button class="btn-pay" id="trigger-payment-gate">Continue to Payment</button>
+    </div>
+
+    <!-- DYNAMIC CORE FAQ MODULE -->
+    <div class="faq-section">
+        <h3 class="faq-title">Frequently Asked Questions</h3>
+        
+        <div class="accordion" id="faqAccordion">
+            <div class="faq-item">
+                <button class="faq-q-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                    How do I receive my Welcome Bonus?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div id="collapseOne" class="collapse show" data-bs-parent="#faqAccordion">
+                    <div class="faq-a" id="faq-bonus-response">
+                        Immediately after your account activation is confirmed, your cashback is credited straight into your Velora account workspace matrix instantly.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                    Can I withdraw without activation?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div id="collapseTwo" class="collapse" data-bs-parent="#faqAccordion">
+                    <div class="faq-a">
+                        No. Account activation is strictly required to verify your decentralized digital node and unlock global ecosystem payout features safely.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                    Is the activation fee a one-time payment?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div id="collapseThree" class="collapse" data-bs-parent="#faqAccordion">
+                    <div class="faq-a">
+                        Yes. Your selected tier activation is a one-time deployment charge that provisions lifetime workspace authorization parameters inside Velora.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- INJECTED CUSTOM GLASS POP-UP MODAL OVERLAY -->
+<div class="velora-alert-overlay" id="payment-gate-overlay">
+    <div class="velora-alert-modal">
+        <div class="velora-alert-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </div>
+        <h3 class="velora-alert-title">Initializing Gateway</h3>
+        <p class="velora-alert-msg">Establishing a secure connection with our off-grid payment matrix engine. Please wait...</p>
+        <button class="velora-popup-btn" id="proceed-final-route">Proceed securely</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Evaluate user choice from state storage
+        const rawSelectedPlan = localStorage.getItem('velora_selected_plan') || 'VELORA PLATINUM — ₦9,000';
+        
+        const titleNode = document.getElementById("package-title-node");
+        const costNode = document.getElementById("package-cost-node");
+        const matrixContainer = document.getElementById("package-benefits-matrix");
+        const faqBonusText = document.getElementById("faq-bonus-response");
+
+        // Runtime layout injection mapping states
+        if (rawSelectedPlan.includes("PREMIUM") || rawSelectedPlan.includes("GOLD")) {
+            // UI Visual Mutation to Gold / Premium Tier
+            titleNode.innerText = "VELORA GOLD PACKAGE";
+            costNode.innerText = "₦5,000";
+            faqBonusText.innerText = "Immediately after your account activation is confirmed, your ₦12,000 cashback is credited straight into your Velora account workspace matrix instantly.";
+
+            matrixContainer.innerHTML = `
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>AI Rewards:</strong> AI Upload Reward (₦1,500 / $0.75) • AI Lucky Book Reward (₦5,000 / $2.50)</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>Football Quiz Reward:</strong> Earn up to ₦4,000 ($2.00) via sports predictions.</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>YouTube Earnings:</strong> Up to ₦20,000 ($10.00) task monetization metrics.</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>Snapchat Earnings:</strong> Secure ₦1,000 ($0.50) via social loops.</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>Active User Spillover:</strong> Receive ₦1,000 ($0.50) network rewards.</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>Ecosystem Perks:</strong> Priority Withdrawal Matrix Clearance</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>Support Vector:</strong> 24/7 Premium Support Interface Access</span></li>
+            `;
+        } else {
+            // Default Fallback: UI Visual Mutation to Platinum Tier
+            titleNode.innerText = "VELORA PLATINUM PACKAGE";
+            costNode.innerText = "₦9,000";
+            faqBonusText.innerText = "Immediately after your account activation is confirmed, your ₦8,000 cashback is credited straight into your Velora account workspace matrix instantly.";
+
+            matrixContainer.innerHTML = `
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>AI Rewards:</strong> AI Upload Reward (₦2,000 / $1.00) • AI Lucky Book Reward (₦10,000 / $5.00)</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>Football Quiz Reward:</strong> Earn up to ₦8,000 ($4.00) from prediction streams.</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>YouTube Earnings:</strong> Up to ₦40,000 ($20.00) direct engagement payouts.</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>Snapchat Earnings:</strong> Extract ₦6,000 ($3.00) daily workflow capital.</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>Active User Spillover:</strong> Receive ₦8,000 ($4.00) structural spillover.</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>Ecosystem Perks:</strong> Priority Withdrawal Matrix Clearance</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span><strong>Support Vector:</strong> 24/7 Premium Support Interface Access</span></li>
+            `;
+        }
+
+        // --- INTERACTIVE POP-UP DISPATCH CONTROLLER ---
+        const payBtn = document.getElementById("trigger-payment-gate");
+        const modalOverlay = document.getElementById("payment-gate-overlay");
+        const finalRouteBtn = document.getElementById("proceed-final-route");
+
+        payBtn.addEventListener("click", () => {
+            modalOverlay.classList.add("show");
+        });
+
+        finalRouteBtn.addEventListener("click", () => {
+            modalOverlay.classList.remove("show");
+            setTimeout(() => {
+                window.location.href = "payment.html";
+            }, 150);
+        });
+
+        // Close on background click safely
+        modalOverlay.addEventListener("click", (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove("show");
+            }
+        });
+    });
+</script>
+</body>
+</html>
+
