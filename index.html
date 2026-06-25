@@ -261,7 +261,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="logo-area" href="index.html"><span>✦</span> VELORA</a>
+            <a class="logo-area" href="index.html"><span>V</span> VELORA</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border:none; color:white;">
                 <i class="fa-solid fa-bars-staggered"></i>
             </button>
@@ -458,12 +458,12 @@
             <div class="popup-header">
                 <i class="fa-solid fa-crown" style="color: var(--velora-primary); margin-right: 4px;"></i>
                 <span id="user-flag">🇳🇬</span> 
-                <strong id="user-name">Rapheal</strong> &nbsp;from&nbsp; 
+                <strong id="user-name">Joe</strong> &nbsp;from&nbsp; 
                 <span id="user-location">Port Harcourt</span>
             </div>
             <div class="popup-body">
                 <span id="user-action">just activated</span><br>
-                <strong id="activity-detail" style="color:#fff;">VELORA PREMIUM — ₦14,000</strong>
+                <strong id="activity-detail" style="color:#fff;">VELORA PREMIUM — ₦14,500</strong>
             </div>
             <div class="popup-footer">
                 • <span id="time-ago">Just now</span>
@@ -493,7 +493,7 @@
                 <button class="chat-opt-btn" onclick="askQuestion(1)">What is the difference between plans?</button>
                 <button class="chat-opt-btn" onclick="askQuestion(2)">How long does verification take?</button>
                 <button class="chat-opt-btn" onclick="askQuestion(3)">Can I pay via Mobile Money?</button>
-                <a href="https://t.me/olay1244" target="_blank" class="btn btn-sm btn-light w-100 fw-bold mt-2 py-2" style="border-radius:10px; font-size:0.8rem;">
+                <a href="https://t.me/OLAMIMEDIA" target="_blank" class="btn btn-sm btn-light w-100 fw-bold mt-2 py-2" style="border-radius:10px; font-size:0.8rem;">
                     <i class="fa-brands fa-telegram me-1"></i> Message Admin Directly
                 </a>
             </div>
@@ -542,15 +542,47 @@
                 messageArea.scrollTop(messageArea[0].scrollHeight);
             }, 600);
         }
+const users = [
+    // Original 4 entries (Updated pricing to 14,500 and 9,000)
+    { name: "Emmanuel", city: "Port Harcourt", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Blessing", city: "Lagos", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Chisom", city: "Abuja", flag: "🇳🇬", plan: "activated LITE ACCESS — ₦9,000" },
+    { name: "Bisi", city: "Aba", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
 
-        // Live notification loop configuration
-        const users = [
-            { name: "Emmanuel", city: "Port Harcourt", flag: "🇳🇬", plan: "PREMIUM ACCESS — ₦14,000" },
-            { name: "Blessing", city: "Lagos", flag: "🇳🇬", plan: "PREMIUM ACCESS — ₦14,000" },
-            { name: "Chisom", city: "Abuja", flag: "🇳🇬", plan: "LITE ACCESS — ₦8,500" },
-            { name: "Kofi", city: "Accra", flag: "🇬🇭", plan: "PREMIUM ACCESS — ₦14,000" }
-        ];
+    // 20 New Plan Activations (Velora Gold & Lite)
+    { name: "Chidi", city: "Enugu", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Amara", city: "Asaba", flag: "🇳🇬", plan: "activated LITE ACCESS — ₦9,000" },
+    { name: "Tunde", city: "Ibadan", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Yetunde", city: "Lagos", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Chioma", city: "Owerri", flag: "🇳🇬", plan: "activated LITE ACCESS — ₦9,000" },
+    { name: "Kwame", city: "Warri", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Ama", city: "Lagos", flag: "🇳🇬", plan: "activated LITE ACCESS — ₦9,000" },
+    { name: "Abubakar", city: "Kano", flag: "🇳🇬", plan: "activated LITE ACCESS — ₦9,000" },
+    { name: "Femi", city: "Akure", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Somto", city: "Onitsha", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Efe", city: "Warri", flag: "🇳🇬", plan: "activated LITE ACCESS — ₦9,000" },
+    { name: "Zainab", city: "Kaduna", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Nii", city: "Otta", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Tobi", city: "Abeokuta", flag: "🇳🇬", plan: "activated LITE ACCESS — ₦9,000" },
+    { name: "Uche", city: "Port Harcourt", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Funmi", city: "Ilorin", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Obinna", city: "Aba", flag: "🇳🇬", plan: "activated LITE ACCESS — ₦9,000" },
+    { name: "Damilola", city: "Lagos", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Akosua", city: "Takoradi", flag: "🇳🇬", plan: "activated VELORA GOLD — ₦14,500" },
+    { name: "Ibrahim", city: "Abuja", flag: "🇳🇬", plan: "activated LITE ACCESS — ₦9,000" },
 
+
+    { name: "Precious", city: "Port Harcourt", flag: "🇳🇬", plan: "withdrew ₦45,000 via VELORA PLATINUM" },
+    { name: "Olumide", city: "Lagos", flag: "🇳🇬", plan: "withdrew ₦72,000 via VELORA PLATINUM" },
+    { name: "Chinedu", city: "Enugu", flag: "🇳🇬", plan: "withdrew ₦28,500 via VELORA PLATINUM" },
+    { name: "Isaac", city: "Lagos", flag: "🇳🇬", plan: "withdrew ₦55,000 equivalence via VELORA PLATINUM" },
+    { name: "Aisha", city: "Abuja", flag: "🇳🇬", plan: "withdrew ₦90,000 via VELORA PLATINUM" },
+    { name: "Tochukwu", city: "Awka", flag: "🇳🇬", plan: "withdrew ₦35,000 via VELORA PLATINUM" },
+    { name: "Seyi", city: "Ibadan", flag: "🇳🇬", plan: "withdrew ₦64,500 via VELORA PLATINUM" },
+    { name: "Olayinka", city: "Lagos", flag: "🇳🇬", plan: "withdrew ₦41,000 equivalence via VELORA PLATINUM" },
+    { name: "Nkechi", city: "Lagos", flag: "🇳🇬", plan: "withdrew ₦115,000 via VELORA PLATINUM" },
+    { name: "Ola", city: "Port Harcourt", flag: "🇳🇬", plan: "withdrew ₦50,000 via VELORA PLATINUM" }
+];
         function showPopup() {
             const user = users[Math.floor(Math.random() * users.length)];
             $('#user-flag').text(user.flag);
