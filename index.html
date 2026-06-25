@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Velora | Elevate Your Digital Footprint</title>
+    <meta name="description" content="Join Velora to turn your everyday lifestyle into global content and digital assets. The ultimate ecosystem for modern creators.">
+    <!-- Brand Color Accent: Deep Purple/Indigo Aura -->
+    <meta name="theme-color" content="#6366f1">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Velora Color Scheme: Deep Luxury Indigo, Electric Violet, and Cyber Glow */
+            --velora-primary: #6366f1;
+            --velora-accent: #a855f7;
+            --velora-glow: rgba(99, 102, 241, 0.4);
+            --dark-bg: #0b0a12;
+            --section-bg-2: #110f1c;
+            --section-bg-3: #161426;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-gray: #a1a1aa;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            z-index: 1030;
+            padding: 1.5rem 0;
+            transition: all 0.4s ease;
+        }
+        .navbar-scrolled {
+            padding: 0.8rem 0;
+            background: rgba(11, 10, 18, 0.9) !important; 
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo-area { font-weight: 900; font-size: 1.5rem; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; }
+        .logo-area span { color: var(--velora-primary); font-size: 1.8rem; }
+        .nav-link { color: #fff !important; font-weight: 600; font-size: 0.9rem; margin: 0 15px; transition: 0.3s; }
+        .nav-link:hover { color: var(--velora-primary) !important; }
+
+        .btn-custom {
+            text-decoration: none !important;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 800;
+            transition: 0.3s;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .btn-velora {
+            background: linear-gradient(135deg, var(--velora-primary), var(--velora-accent));
+            color: #fff;
+            border: none;
+        }
+        .btn-velora:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--velora-glow);
+            color: #fff;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            background: var(--glass);
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        /* --- HERO --- */
+        #hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at top right, #1e1b4b 0%, #0b0a12 65%);
+            padding-top: 100px;
+        }
+        .hero-title { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+        .hero-title span { background: linear-gradient(to right, var(--velora-primary), var(--velora-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { color: var(--text-gray); font-size: 1.1rem; max-width: 500px; margin-bottom: 40px; }
+
+        .hero-img-box {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+
+        /* --- SECTIONS --- */
+        .section-padding { padding: 100px 0; }
+        .glow-text { text-shadow: 0 0 20px var(--velora-glow); }
+        .section-title { font-weight: 900; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 40px; }
+
+        /* --- FEATURE CARDS --- */
+        .feature-box {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 40px 30px;
+            border-radius: 25px;
+            height: 100%;
+            transition: 0.4s;
+        }
+        .feature-box:hover { transform: translateY(-10px); border-color: var(--velora-primary); background: rgba(99, 102, 241, 0.03); }
+        .feature-icon { font-size: 2.5rem; color: var(--velora-primary); margin-bottom: 20px; }
+
+        /* --- PRICING (TWO PLANS) --- */
+        .package-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 50px 30px;
+            border-radius: 30px;
+            text-align: center;
+            position: relative;
+            transition: 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .package-card.premium { 
+            background: rgba(22, 20, 38, 0.6); 
+            border: 2px solid var(--velora-primary); 
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+        }
+        .price { font-size: 3.2rem; font-weight: 900; margin: 20px 0; color: #fff; }
+        .price span { font-size: 1.5rem; vertical-align: top; margin-right: 2px; }
+        .benefit-list { list-style: none; padding: 0; text-align: left; margin: 30px 0; flex-grow: 1; }
+        .benefit-list li { margin-bottom: 12px; font-weight: 400; color: #e4e4e7; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .benefit-list li i { color: var(--velora-primary); }
+
+        /* --- POPUP & CHAT WIDGET --- */
+        #popup-container {
+            position: fixed; bottom: 20px; left: 20px; background: #161426; padding: 15px 20px;
+            border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: var(--font-main);
+            border: 1px solid var(--glass-border); border-left: 5px solid var(--velora-primary); 
+            transition: 0.5s; z-index: 1000; color: #fff; min-width: 280px;
+        }
+        .popup-hidden { opacity: 0; transform: translateX(-100%); pointer-events: none; }
+        .popup-visible { opacity: 1; transform: translateX(0); }
+        .popup-header { font-size: 0.9rem; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+        .popup-body { font-size: 0.85rem; color: var(--text-gray); }
+        .popup-footer { font-size: 0.75rem; color: #6b7280; margin-top: 5px; }
+
+        .chat-widget { position: fixed; bottom: 30px; right: 20px; z-index: 999; }
+        .chat-toggle {
+            width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--velora-primary), var(--velora-accent));
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; cursor: pointer; box-shadow: 0 10px 25px var(--velora-glow); transition: 0.3s;
+        }
+        .chat-toggle:hover { transform: scale(1.05); }
+        .chat-box {
+            width: 320px; background: #110f1c; border: 1px solid var(--glass-border);
+            border-radius: 20px; position: absolute; bottom: 80px; right: 0;
+            display: none; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+        .chat-messages {
+            max-height: 200px; overflow-y: auto; padding: 15px; background: rgba(0,0,0,0.2);
+        }
+        .chat-bubble {
+            background: var(--glass); padding: 10px 14px; border-radius: 14px; 
+            font-size: 0.85rem; margin-bottom: 10px; border: 1px solid var(--glass-border);
+        }
+        .chat-bubble.admin {
+            background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.2);
+        }
+        .chat-options {
+            padding: 10px 15px; border-top: 1px solid var(--glass-border);
+        }
+        .chat-opt-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+            color: #fff; text-align: left; width: 100%; padding: 8px 12px; 
+            border-radius: 10px; font-size: 0.8rem; margin-bottom: 6px; transition: 0.2s;
+        }
+        .chat-opt-btn:hover {
+            background: var(--velora-primary); border-color: var(--velora-primary);
+        }
+
+        /* --- FAQ CUSTOM STYLING --- */
+        .accordion-item {
+            background: var(--glass) !important;
+            border: 1px solid var(--glass-border) !important;
+            border-radius: 15px !important;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        .accordion-button {
+            background: transparent !important;
+            color: #fff !important;
+            font-weight: 600;
+            padding: 20px;
+            box-shadow: none !important;
+            border: none;
+        }
+        .accordion-button:not(.collapsed) {
+            color: var(--velora-primary) !important;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .accordion-button::after {
+            filter: brightness(0) invert(1);
+        }
+        .accordion-body {
+            color: var(--text-gray);
+            line-height: 1.6;
+            background: rgba(0,0,0,0.2);
+        }
+        .faq-subtitle {
+            color: var(--velora-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* --- WATERMARK --- */
+        .watermark {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.2);
+            margin-top: 25px;
+            display: block;
+            font-weight: 700;
+        }
+        .watermark span {
+            color: var(--velora-primary);
+        }
+
+        @media (max-width: 991px) {
+            .hero-title { text-align: center; }
+            .hero-subtitle { text-align: center; margin: 0 auto 30px; }
+            .hero-btns { justify-content: center; display: flex; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="logo-area" href="index.html"><span>✦</span> VELORA</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border:none; color:white;">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="#hero-section">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about-section">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features-section">Ecosystem</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing-section">Pricing</a></li>
+                </ul>
+                <a href="signup.html" class="btn-custom btn-velora">Join Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="hero-title">Elevate Your <span>Lifestyle</span> to Assets</h1>
+                    <p class="hero-subtitle">Turn your creativity, habits, and daily routines into global digital content with Europe’s leading creative partner.</p>
+                    <div class="hero-btns">
+                        <a href="signup.html" class="btn-custom btn-velora">Get Started</a>
+                        <a href="#about-section" class="btn-custom btn-outline">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left">
+                    <div class="hero-img-box">
+                        <img src="hero-banner.jpg" class="img-fluid" alt="Velora Luxury">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about-section" class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0" data-aos="zoom-in">
+                    <img src="about-img.jpg" class="img-fluid rounded-4" alt="About Velora">
+                </div>
+                <div class="col-lg-7 ps-lg-5" data-aos="fade-up">
+                    <h2 class="section-title glow-text">What is Velora?</h2>
+                    <p class="text-secondary lead">Velora is a premium global institution that partners with African visionaries to showcase lifestyle, creativity, and daily execution across standard platforms.</p>
+                    <p class="text-secondary">We bridge the structural gap between talented emerging creators and international commercial frameworks. Through our dynamic digital ecosystem, your signature style becomes an enterprise.</p>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <h3 class="fw-bold mb-0">100%</h3>
+                            <small class="text-uppercase text-secondary">Remote Gigs</small>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="fw-bold mb-0" style="color: var(--velora-primary);">Global</h3>
+                            <small class="text-uppercase text-secondary">Exposure</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features-section" class="section-padding" style="background: var(--section-bg-2);">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">The Ecosystem</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-wand-magic-sparkles feature-icon"></i>
+                        <h4>VELORA LIFESTYLE</h4>
+                        <p class="text-secondary">Monetize your curated visuals. Convert aesthetics and design languages into premium assets distributed worldwide.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-laptop-code feature-icon"></i>
+                        <h4>VELORA LABS</h4>
+                        <p class="text-secondary">Direct connection to technical and creative placement programs, partnering directly with leading European organizations.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-heart-pulse feature-icon"></i>
+                        <h4>VELORA VITALITY</h4>
+                        <p class="text-secondary">High performance requires systematic wellness. Track benchmarks and unlock programmatic asset rewards.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION - VELORA TWO PLANS -->
+    <section id="pricing-section" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title glow-text">Choose Your Path</h2>
+            </div>
+            <div class="row justify-content-center g-4">
+                <!-- Plan 1: Standard Access -->
+                <div class="col-lg-5 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="package-card">
+                        <div>
+                            <span class="badge bg-secondary mb-3">BASIC ACCESS</span>
+                            <h3 class="fw-bold">LITE ACCESS</h3>
+                            <div class="price"><span>₦</span>8,500</div>
+                            <ul class="benefit-list">
+                                <li><i class="fa-solid fa-check"></i> Entry-Level SkillUp Curriculums</li>
+                                <li><i class="fa-solid fa-check"></i> Standard Digital Hub Access</li>
+                                <li><i class="fa-solid fa-check"></i> Regional Remote Gig Feeds</li>
+                                <li><i class="fa-solid fa-check"></i> Standard Email Support</li>
+                            </ul>
+                        </div>
+                        <a href="signup.html" class="btn-custom btn-outline w-100 mt-4">Get Started</a>
+                    </div>
+                </div>
+                
+                <!-- Plan 2: Premium Access -->
+                <div class="col-lg-5 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="package-card premium">
+                        <div>
+                            <span class="badge bg-indigo mb-3" style="background-color: var(--velora-primary);">RECOMMENDED</span>
+                            <h3 class="fw-bold">PREMIUM ACCESS</h3>
+                            <div class="price"><span>₦</span>14,000</div>
+                            <ul class="benefit-list">
+                                <li><i class="fa-solid fa-check"></i> Full Access to Premium SkillUp Tracks</li>
+                                <li><i class="fa-solid fa-check"></i> Elite Vitality Dynamic Rewards Pool</li>
+                                <li><i class="fa-solid fa-check"></i> Priority Global Ecosystem Placements</li>
+                                <li><i class="fa-solid fa-check"></i> 24/7 Dedicated Account Engineers</li>
+                            </ul>
+                        </div>
+                        <a href="signup.html" class="btn-custom btn-velora w-100 mt-4">Upgrade to Premium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq-section" class="section-padding" style="background: var(--section-bg-3);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <span class="faq-subtitle">Have Questions?</span>
+                        <h2 class="section-title glow-text">Common Inquiries</h2>
+                    </div>
+
+                    <div class="accordion" id="veloraFAQ" data-aos="fade-up">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    How do I earn with Velora?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#veloraFAQ">
+                                <div class="accordion-body">
+                                    You monetize your regular assets, technical execution, and creative formatting directly through foreign pipelines structured by our framework handlers.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Are the entry payments structured monthly?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#veloraFAQ">
+                                <div class="accordion-body">
+                                    No, all tiers represent full programmatic architecture licenses granted for a standard 12-month sequence.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="section-padding" style="background: #06050b; border-top: 1px solid var(--glass-border);">
+        <div class="container text-center">
+            <a class="logo-area justify-content-center mb-4" href="#"><span>✦</span> VELORA</a>
+            <p class="text-secondary mx-auto" style="max-width: 600px;">Redefining digital advancement via technology and creativity. Partnering with the next generation of African creators.</p>
+            <div class="mt-4">
+                <p class="text-secondary small">&copy; 2026 Velora Systems. All Rights Reserved.</p>
+                <!-- Custom Requested Watermark -->
+                <div class="watermark">BUILT BY <span>RAPHXSOLN</span></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- DYNAMIC POPUP NOTIFICATION (WITH CROWN ICON) -->
+    <div id="popup-container" class="popup-hidden">
+        <div class="popup-content">
+            <div class="popup-header">
+                <i class="fa-solid fa-crown" style="color: var(--velora-primary); margin-right: 4px;"></i>
+                <span id="user-flag">🇳🇬</span> 
+                <strong id="user-name">Rapheal</strong> &nbsp;from&nbsp; 
+                <span id="user-location">Port Harcourt</span>
+            </div>
+            <div class="popup-body">
+                <span id="user-action">just activated</span><br>
+                <strong id="activity-detail" style="color:#fff;">VELORA PREMIUM — ₦14,000</strong>
+            </div>
+            <div class="popup-footer">
+                • <span id="time-ago">Just now</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE SUPPORT CHAT WIDGET -->
+    <div class="chat-widget">
+        <div class="chat-toggle" onclick="toggleChat()">
+            <i class="fa-solid fa-crown"></i>
+        </div>
+        <div class="chat-box" id="chatBox">
+            <div style="background: linear-gradient(135deg, var(--velora-primary), var(--velora-accent)); color:#fff; padding:15px; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <i class="fa-solid fa-crown me-2"></i>
+                    <span class="fw-bold">Velora Concierge</span>
+                </div>
+                <i class="fa-solid fa-xmark" onclick="toggleChat()" style="cursor:pointer;"></i>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-bubble admin">
+                    Welcome to Velora Support. Tap a question below for immediate response parameters, or reach our admin team.
+                </div>
+            </div>
+            <div class="chat-options">
+                <button class="chat-opt-btn" onclick="askQuestion(1)">What is the difference between plans?</button>
+                <button class="chat-opt-btn" onclick="askQuestion(2)">How long does verification take?</button>
+                <button class="chat-opt-btn" onclick="askQuestion(3)">Can I pay via Mobile Money?</button>
+                <a href="https://t.me/olay1244" target="_blank" class="btn btn-sm btn-light w-100 fw-bold mt-2 py-2" style="border-radius:10px; font-size:0.8rem;">
+                    <i class="fa-brands fa-telegram me-1"></i> Message Admin Directly
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.navbar').addClass('navbar-scrolled');
+            } else {
+                $('.navbar').removeClass('navbar-scrolled');
+            }
+        });
+
+        function toggleChat() {
+            $('#chatBox').fadeToggle(300);
+        }
+
+        // Automated Question & Reply Engine
+        function askQuestion(id) {
+            let userMsg = "";
+            let replyMsg = "";
+            
+            if(id === 1) {
+                userMsg = "What is the difference between plans?";
+                replyMsg = "Lite access provides baseline skills courses. Premium opens full global job placement networks and our active dynamic rewards system directly.";
+            } else if(id === 2) {
+                userMsg = "How long does verification take?";
+                replyMsg = "Ecosystem applications are regularly validated within 2 to 6 hours from initial premium activation clearance.";
+            } else if(id === 3) {
+                userMsg = "Can I pay via Mobile Money?";
+                replyMsg = "Yes! Our integrated local portal processes automated checkouts across Nigerian Bank instruments and Ghanaian Mobile Money nodes flawlessly.";
+            }
+
+            let messageArea = $('#chatMessages');
+            messageArea.append(`<div class="chat-bubble text-end text-info" style="background:rgba(255,255,255,0.05)">${userMsg}</div>`);
+            
+            setTimeout(() => {
+                messageArea.append(`<div class="chat-bubble admin">${replyMsg}</div>`);
+                messageArea.scrollTop(messageArea[0].scrollHeight);
+            }, 600);
+        }
+
+        // Live notification loop configuration
+        const users = [
+            { name: "Emmanuel", city: "Port Harcourt", flag: "🇳🇬", plan: "PREMIUM ACCESS — ₦14,000" },
+            { name: "Blessing", city: "Lagos", flag: "🇳🇬", plan: "PREMIUM ACCESS — ₦14,000" },
+            { name: "Chisom", city: "Abuja", flag: "🇳🇬", plan: "LITE ACCESS — ₦8,500" },
+            { name: "Kofi", city: "Accra", flag: "🇬🇭", plan: "PREMIUM ACCESS — ₦14,000" }
+        ];
+
+        function showPopup() {
+            const user = users[Math.floor(Math.random() * users.length)];
+            $('#user-flag').text(user.flag);
+            $('#user-name').text(user.name);
+            $('#user-location').text(user.city);
+            $('#activity-detail').text(user.plan);
+            $('#time-ago').text(Math.floor(Math.random() * 8) + 1 + " mins ago");
+
+            $('#popup-container').removeClass('popup-hidden').addClass('popup-visible');
+            setTimeout(() => {
+                $('#popup-container').removeClass('popup-visible').addClass('popup-hidden');
+            }, 5000);
+        }
+
+        setInterval(showPopup, 14000);
+        setTimeout(showPopup, 3000);
+    </script>
+</body>
+</html>
