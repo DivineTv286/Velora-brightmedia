@@ -379,8 +379,8 @@
         // Runtime layout injection mapping states
         if (rawSelectedPlan.includes("PREMIUM") || rawSelectedPlan.includes("GOLD")) {
             // UI Visual Mutation to Gold / Premium Tier
-            titleNode.innerText = "VELORA GOLD PACKAGE";
-            costNode.innerText = "₦5,000";
+            titleNode.innerText = "VELORA GOLD ";
+            costNode.innerText = "₦12,000";
             faqBonusText.innerText = "Immediately after your account activation is confirmed, your ₦12,000 cashback is credited straight into your Velora account workspace matrix instantly.";
 
             matrixContainer.innerHTML = `
@@ -394,7 +394,7 @@
             `;
         } else {
             // Default Fallback: UI Visual Mutation to Platinum Tier
-            titleNode.innerText = "VELORA PLATINUM PACKAGE";
+            titleNode.innerText = "VELORA PLATINUM";
             costNode.innerText = "₦9,000";
             faqBonusText.innerText = "Immediately after your account activation is confirmed, your ₦8,000 cashback is credited straight into your Velora account workspace matrix instantly.";
 
