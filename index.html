@@ -477,24 +477,22 @@
         </div>
     </footer>
 
-    <!-- DYNAMIC POPUP NOTIFICATION (WITH CROWN ICON) -->
-    <div id="popup-container" class="popup-hidden">
-        <div class="popup-content">
-            <div class="popup-header">
-                <i class="fa-solid fa-crown" style="color: var(--velora-primary); margin-right: 4px;"></i>
-                <span id="user-flag">🇳🇬</span> 
-                <strong id="user-name">Joe</strong> &nbsp;from&nbsp; 
-                <span id="user-location">Port Harcourt</span>
-            </div>
-            <div class="popup-body">
-                <span id="user-action">just activated</span><br>
-                <strong id="activity-detail" style="color:#fff;">VELORA PREMIUM — ₦14,500</strong>
-            </div>
-            <div class="popup-footer">
-                • <span id="time-ago">Just now</span>
-            </div>
+<div id="popup-container" class="popup-hidden">
+    <div class="popup-content">
+        <div class="popup-header">
+            <i class="fa-solid fa-crown" style="color: var(--velora-primary); margin-right: 4px;"></i>
+            <span id="user-flag">🇳🇬</span> 
+            <strong id="user-name">Joe</strong> &nbsp;from&nbsp; 
+            <span id="user-location">Port Harcourt</span>
+        </div>
+        <div class="popup-body">
+            <span id="activity-detail" style="color:#fff; font-weight: 700;"></span>
+        </div>
+        <div class="popup-footer">
+            • <span id="time-ago">Just now</span>
         </div>
     </div>
+</div>
 
     <!-- INTERACTIVE SUPPORT CHAT WIDGET -->
     <div class="chat-widget">
@@ -609,21 +607,20 @@ const users = [
     { name: "Ola", city: "Port Harcourt", flag: "🇳🇬", plan: "withdrew ₦50,000 via VELORA PLATINUM" }
 ];
         function showPopup() {
-            const user = users[Math.floor(Math.random() * users.length)];
-            $('#user-flag').text(user.flag);
-            $('#user-name').text(user.name);
-            $('#user-location').text(user.city);
-            $('#activity-detail').text(user.plan);
-            $('#time-ago').text(Math.floor(Math.random() * 8) + 1 + " mins ago");
+    const user = users[Math.floor(Math.random() * users.length)];
+    $('#user-flag').text(user.flag);
+    $('#user-name').text(user.name);
+    $('#user-location').text(user.city);
+    
+    // Using .html() allows it to read embedded bold styling adjustments cleanly
+    $('#activity-detail').html(user.plan);
+    $('#time-ago').text(Math.floor(Math.random() * 8) + 1 + " mins ago");
 
-            $('#popup-container').removeClass('popup-hidden').addClass('popup-visible');
-            setTimeout(() => {
-                $('#popup-container').removeClass('popup-visible').addClass('popup-hidden');
-            }, 5000);
-        }
-
-        setInterval(showPopup, 14000);
-        setTimeout(showPopup, 3000);
+    $('#popup-container').removeClass('popup-hidden').addClass('popup-visible');
+    setTimeout(() => {
+        $('#popup-container').removeClass('popup-visible').addClass('popup-hidden');
+    }, 5000);
+}
     </script>
 </body>
 </html>
