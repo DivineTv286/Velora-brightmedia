@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velora | Unlock Your Earnings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-accent: #d4af37; /* Velora Gold */
+            --primary-purple: #6a0dad; /* Velora Deep Purple */
+            --bright-purple: #b026ff; /* Neon Purple */
+            --velora-green: #2ecc71; /* Accent Green */
+            --dark-bg: #0b001a; /* Dark Royal Violet Background */
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --container-width: 1100px;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top, var(--primary-purple) 0%, #000000 100%);
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            color: white;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        .topbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(11, 0, 26, 0.8); 
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            box-sizing: border-box;
+            border-bottom: 2px solid var(--bright-purple);
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        .logo-text {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: white;
+        }
+        .main-join-btn {
+            background: linear-gradient(135deg, #fff, var(--primary-accent));
+            color: #0b001a;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(176, 38, 255, 0.4);
+            border: none;
+        }
+        .main-join-btn:hover {
+            background: var(--bright-purple);
+            color: white;
+            box-shadow: 0 0 25px rgba(176, 38, 255, 0.7);
+        }
+        .unified-container {
+            width: 90%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+        .hero-box {
+            margin-top: 130px;
+            margin-bottom: 40px;
+            background: var(--glass);
+            border: 2px solid var(--bright-purple);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(176, 38, 255, 0.2);
+        }
+        .hero-box h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, var(--primary-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        .work-box {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+        }
+        .work-box:hover { border-color: var(--bright-purple); transform: translateY(-10px); }
+        .work-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            margin-bottom: 15px;
+        }
+        .work-box h3 { color: var(--primary-accent); margin-bottom: 10px; }
+        .box-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 900;
+            text-align: center;
+            margin-top: auto;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+        .box-btn:hover { 
+            background: var(--bright-purple); 
+            color: #fff; 
+            border-color: var(--bright-purple);
+        }
+        @media (max-width: 768px) {
+            .logo-text { font-size: 22px; }
+            .hero-box h1 { font-size: 2rem; }
+        }
+        .faq-section { margin-bottom: 100px; }
+        details { background: var(--glass); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; }
+        summary { padding: 20px; cursor: pointer; font-weight: 800; display: flex; justify-content: space-between; }
+        summary::after { content: "+"; color: var(--primary-accent); }
+        .main-footer { background: #000; padding: 80px 0 40px; border-top: 1px solid var(--border); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; }
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column ul li { margin-bottom: 12px; color: #999; }
+        .footer-column i { color: var(--primary-accent); margin-right: 10px; }
+        .copyright { margin-top: 50px; text-align: center; color: #444; font-size: 12px; border-top: 1px solid #111; padding-top: 20px; }
+
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+
+        #popup-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            font-family: sans-serif;
+            border-left: 5px solid var(--velora-green);
+            transition: all 0.5s ease-in-out;
+            z-index: 1000;
+            max-width: 280px;
+        }
+        .popup-hidden { opacity: 0; transform: translateX(-100%); }
+        .popup-visible { opacity: 1; transform: translateX(0); }
+        .popup-header { font-size: 14px; color: #333; margin-bottom: 5px; }
+        .popup-body { font-size: 13px; color: #111; line-height: 1.4; }
+        .popup-footer { font-size: 11px; color: #888; margin-top: 8px; }
+
+        .plan-container { text-align: center; padding: 60px 0; }
+        .plan-card {
+            background: #150030; 
+            border: 1px solid rgba(176, 38, 255, 0.3);
+            border-radius: 25px;
+            padding: 40px 25px;
+            max-width: 380px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            box-sizing: border-box; 
+        }
+        .plans-wrapper { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; }
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--bright-purple), var(--primary-accent));
+            color: #fff;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .plan-title { font-size: 24px; font-weight: 800; color: #ffffff; margin-bottom: 10px; }
+        .plan-price {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary-accent);
+            margin-bottom: 20px;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+            padding-bottom: 20px;
+        }
+        .feature-list { list-style: none; padding: 0; margin: 0 0 30px 0; text-align: left; }
+        .feature-list li { color: #f4e8ff; font-size: 15px; margin-bottom: 15px; display: flex; align-items: center; }
+        .feature-list li i { color: var(--velora-green); margin-right: 12px; }
+        .reg-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(90deg, var(--bright-purple), var(--primary-purple));
+            color: #fff;
+            text-decoration: none;
+            padding: 18px 0; 
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 16px;
+            transition: transform 0.2s;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .reg-btn:hover { transform: scale(1.03); }
+    </style>
+</head>
+<body>
+
+<div id="popup-container" class="popup-hidden">
+  <div class="popup-content">
+    <div class="popup-header">
+      <span id="user-flag">🇳🇬</span> 
+      <strong id="user-name">Rebecca</strong> from 
+      <span id="user-location">Lagos</span>
+    </div>
+    <div class="popup-body">
+      <span id="user-action">just withdrew</span><br>
+      <strong id="activity-detail">EARNINGS — ₦14,500</strong>
+    </div>
+    <div class="popup-footer">
+      • <span id="time-ago">2 mins ago</span>
+    </div>
+  </div>
+</div>
+
+    <div class="topbar">
+        <a href="reward.html" class="logo-container">
+            <div class="logo-text">VELORA</div>
+        </a>
+        <a href="reward.html" class="main-join-btn">JOIN NOW</a>
+    </div>
+
+    <div id="about-section" class="unified-container hero-box">
+        <h1>Unlock Your YouTube Earnings</h1>
+        <p style="font-size: 1.2rem; color: #dcd0ff; max-width: 700px; margin: 0 auto 30px;">
+            Grow your audience faster, boost engagement, and unlock monetization opportunities quicker than ever. No camera needed. Just AI + consistency = real income.
+        </p>
+        <div>
+            <a href="reward.html" class="main-join-btn" style="padding: 15px 40px;">GET STARTED NOW <i class="fas fa-rocket"></i></a>
+        </div>
+    </div>
+
+    <div class="unified-container">
+        <h2 style="text-align: center; font-size: 3rem; font-style: italic; color: var(--primary-accent); text-transform: uppercase;">WHAT WE OFFER</h2>
+        
+        <div class="works-grid">
+            <!-- Feature 1: AI Academy -->
+            <div class="work-box">
+                <img src="photo_2026-06-15_20-18-37.jpg" alt="Velora AI Academy">
+                <h3><i class="fas fa-graduation-cap"></i> Velora AI Academy</h3>
+                <p>The all-in-one destination for AI, education, creation, promotion, and monetization. Learn the cutting-edge strategies and earn up to $200 weekly.</p>
+                <a href="reward.html" class="box-btn">ENTER ACADEMY</a>
+            </div>
+
+            <!-- Feature 2: Fan Battle Zone -->
+            <div class="work-box">
+                <img src="photo_2026-06-15_20-42-26.jpg" alt="Velora Fan Battle Zone">
+                <h3><i class="fas fa-trophy"></i> Fan Battle Zone</h3>
+                <p>Join your community and represent your favorite football club in the ultimate fan rivalry experience on Velora. Fight for team glory and earn!</p>
+                <a href="reward.html" class="box-btn">CHOOSE YOUR CLUB</a>
+            </div>
+
+            <!-- Feature 3: Football Quiz League -->
+            <div class="work-box">
+                <img src="photo_2026-06-15_20-29-32.jpg" alt="Velora Football Quiz League">
+                <h3><i class="fas fa-lightbulb"></i> Football Quiz League</h3>
+                <p>Test your football knowledge daily and turn your passion into cash! Enjoy daily quizzes on Premier League, Champions League, transfers, and more to earn up to $10 daily.</p>
+                <a href="reward.html" class="box-btn">START QUIZ</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="unified-container">
+        <section class="plan-container">
+            <h2 style="color: var(--primary-accent); margin-bottom: 40px; font-weight: 800; text-transform: uppercase;">
+                Choose Your Blueprint Pattern
+            </h2>
+
+            <div class="plans-wrapper"> 
+                <!-- Velora Platinum -->
+                <div class="plan-card">
+                    <div class="badge">Popular</div>
+                    <img src="photo_2026-06-18_14-52-20.jpg" alt="Velora Platinum Blueprint" style="width:100%; border-radius:15px; margin-bottom:15px;">
+                    <h3 class="plan-title">Velora Platinum</h3>
+                    <div class="plan-price">₦9,000</div>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Instant Cashback: ₦8,000</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Invite Bonus: ₦7,200</li>
+                        <li><i class="fa-solid fa-circle-check"></i> AI Upload Reward: ₦1,500</li>
+                        <li><i class="fa-solid fa-circle-check"></i> AI Lucky Book: ₦5,000</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Football Quiz Reward: ₦4,000</li>
+                        <li><i class="fa-solid fa-circle-check"></i> YouTube Earn: ₦20K</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Snapchat Earnings: ₦1,000</li>
+                    </ul>
+                    <a href="reward.html" class="reg-btn">Register Platinum</a>
+                </div>
+
+                <!-- Velora Gold -->
+                <div class="plan-card">
+                    <div class="badge">Most Recommended</div>
+                    <img src="photo_2026-06-18_14-52-59.jpg" alt="Velora Gold Blueprint" style="width:100%; border-radius:15px; margin-bottom:15px;">
+                    <h3 class="plan-title">Velora Gold</h3>
+                    <div class="plan-price">₦14,500</div> 
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Instant Cashback: ₦12,000</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Invite Bonus: ₦12,500</li>
+                        <li><i class="fa-solid fa-circle-check"></i> AI Upload Reward: ₦2,000</li>
+                        <li><i class="fa-solid fa-circle-check"></i> AI Lucky Book: ₦10,000</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Football Quiz Reward: ₦5,000</li>
+                        <li><i class="fa-solid fa-circle-check"></i> YouTube Earnings: ₦40K</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Snapchat Earnings: ₦6,000</li>
+                    </ul>
+                    <a href="reward.html" class="reg-btn">Register Gold</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="unified-container faq-section">
+        <h2 style="text-align: center; text-transform: uppercase;">Frequently Asked Questions</h2>
+        <details><summary>How much can I earn from the AI Academy?</summary><div style="padding: 20px; color: #aaa;">Students and creators participating in the Velora AI Academy can unlock educational modules and promotion workflows to earn up to $200 weekly.</div></details>
+        <details><summary>What is the Football Quiz reward structure?</summary><div style="padding: 20px; color: #aaa;">Depending on your active rank and plan layout, you can verify your league knowledge metrics daily and secure payouts reaching up to $10 daily.</div></details>
+        <details><summary>When can I submit a withdrawal request?</summary><div style="padding: 20px; color: #aaa;">Withdrawals can be submitted every single day! There is no long waiting structure holding your funds back.</div></details>
+    </div>
+
+    <footer class="main-footer">
+        <div class="unified-container footer-grid">
+            <div class="footer-brand">
+                <div class="logo-container" style="margin-bottom: 20px;">
+                    <div class="logo-text">VELORA</div>
+                </div>
+                <p>Innovative monetization platform maximizing consistency, digital sharing habits, and smart AI automation workflows.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Platform</h3>
+                <ul><li>Home</li><li>Features</li><li>FAQ</li></ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul><li><i class="fas fa-envelope"></i> support@velora.com</li><li><i class="fas fa-location-dot"></i> Lagos, Nigeria</li></ul>
+            </div>
+        </div>
+        <div class="copyright">&copy; 2026 Velora. All Rights Reserved.</div>
+    </footer>
+
+    <script>
+const popup = document.getElementById('popup-container');
+
+const users = [
+    { name: "Olakunle", city: "Lagos", country: "Nigeria", flag: "🇳🇬", currency: "₦" },
+    { name: "Chidi", city: "Enugu", country: "Nigeria", flag: "🇳🇬", currency: "₦" },
+    { name: "Amina", city: "Kano", country: "Nigeria", flag: "🇳🇬", currency: "₦" },
+    { name: "Blessing", city: "Port Harcourt", country: "Nigeria", flag: "🇳🇬", currency: "₦" }
+];
+
+function showPopup() {
+    const user = users[Math.floor(Math.random() * users.length)];
+    
+    const activities = [
+        { text: "just withdrew", detail: `EARNINGS — ${user.currency}${Math.floor(Math.random() * 15000) + 5000}` },
+        { text: "activated blueprint:", detail: "VELORA GOLD" },
+        { text: "activated blueprint:", detail: "VELORA PLATINUM" },
+        { text: "earned from trivia:", detail: `BONUS — ${user.currency}4,000` }
+    ];
+    const act = activities[Math.floor(Math.random() * activities.length)];
+
+    document.getElementById('user-flag').innerText = user.flag;
+    document.getElementById('user-name').innerText = user.name;
+    document.getElementById('user-location').innerText = user.city;
+    document.getElementById('user-action').innerText = act.text;
+    document.getElementById('activity-detail').innerText = act.detail;
+    document.getElementById('time-ago').innerText = `${Math.floor(Math.random() * 15) + 1} mins ago`;
+
+    popup.classList.remove('popup-hidden');
+    popup.classList.add('popup-visible');
+
+    setTimeout(() => {
+        popup.classList.remove('popup-visible');
+        popup.classList.add('popup-hidden');
+    }, 5000);
+}
+setInterval(showPopup, 10000);
+setTimeout(showPopup, 2000);
+</script>
+</body>
+</html>
